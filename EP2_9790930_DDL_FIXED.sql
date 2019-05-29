@@ -1,25 +1,35 @@
-CREATE TABLE b0_USUARIO (
-	login				varchar(20) NOT NULL,
-	senha				varchar(280) NOT NULL,
-	data_criacao		timestamp,
-	CONSTRAINT pk_usuario PRIMARY KEY (login)
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+CREATE EXTENSION IF NOT EXISTS citext;
+
+CREATE ROLE dba
+	WITH SUPERUSER CREATEDB CREATEROLE
+	LOGIN ENCRYPTED PASSWORD 'dba1234'
+	VALID UNTIL '2019-07-01';
+CREATE SCHEMA IF NOT EXISTS admins;
+GRANT admins TO dba;
+
+DROP DOMAIN IF EXISTS email CASCADE;
+CREATE DOMAIN email AS citext
+  CHECK ( value ~ '^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$' );
+
+
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+	us_id       SERIAL,
+	us_email    email,
+	us_password TEXT NOT NULL,
+	CONSTRAINT pk_user PRIMARY KEY (us_id),
+	CONSTRAINT sk_user UNIQUE (us_email)
 );
 
-CREATE TABLE b00_US_EMAIL (
-	us_login       		varchar(20) NOT NULL,
-	email 				varchar(280) NOT NULL,
-	CONSTRAINT pk_us_email PRIMARY KEY (us_login, email),
-	CONSTRAINT fk_us FOREIGN KEY (us_login)
-		REFERENCES b0_USUARIO(login)
-
-);
-
+DROP TABLE IF EXISTS b01_PERFIL;
 CREATE TABLE b01_PERFIL (
 	tipo				varchar(280) NOT NULL,
 	CONSTRAINT pk_perfil PRIMARY KEY (tipo)
 
 );
 
+DROP TABLE IF EXISTS b02_SERVICO;
 CREATE TABLE b02_SERVICO (
 	id SERIAL,
 	nome         		varchar(280),
@@ -27,6 +37,7 @@ CREATE TABLE b02_SERVICO (
 	CONSTRAINT pk_SERVICO PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS b03_PF_SE;
 CREATE TABLE b03_PF_SE (
 	pf_tipo 			varchar(280),
 	se_id 				int,
@@ -37,26 +48,29 @@ CREATE TABLE b03_PF_SE (
 		REFERENCES b01_PERFIL(tipo)
 );
 
+DROP TABLE IF EXISTS b04_US_PF;
 CREATE TABLE b04_US_PF (
 	us_login 			varchar(20),
 	pf_tipo 			varchar(280),
 	CONSTRAINT pk_us_pf PRIMARY KEY (us_login, pf_tipo),
 	CONSTRAINT fk_us_pf2 FOREIGN KEY (us_login)
-		REFERENCES b0_USUARIO(login),
+		REFERENCES users(us_id),
 	CONSTRAINT fk_us_pf3 FOREIGN KEY (pf_tipo)
 		REFERENCES b01_PERFIL(tipo)
 
 );
 
+DROP TABLE IF EXISTS b05_PESSOA;
 CREATE TABLE b05_PESSOA (
 	nusp 				int NOT NULL check (nusp between 0 and 999999999),
 	us_login 			varchar(20),
 	pnome varchar(280),
 	CONSTRAINT pk_pessoa PRIMARY KEY (nusp),
 	CONSTRAINT fk_pessoa FOREIGN KEY (us_login)
-		REFERENCES b0_USUARIO(login)
+		REFERENCES users(us_id)
 );
 
+DROP TABLE IF EXISTS b06_PE_SNOME;
 CREATE TABLE b06_PE_SNOME (
 	pe_nusp 			int NOT NULL check (pe_nusp between 0 and 999999999),
 	snome 				varchar(280),
@@ -65,6 +79,7 @@ CREATE TABLE b06_PE_SNOME (
 		REFERENCES b05_PESSOA(nusp)
 );
 
+DROP TABLE IF EXISTS b07_PROFESSOR;
 CREATE TABLE b07_PROFESSOR (
 	pe_nusp 			int NOT NULL check (pe_nusp between 0 and 999999999),
 	status				char(2) CHECK (status IN ('ap','at','in')),
@@ -77,6 +92,8 @@ CREATE TABLE b07_PROFESSOR (
 		REFERENCES b05_PESSOA(nusp)
 
 );
+
+DROP TABLE IF EXISTS b08_PF_ESPECIALIZACAO;
 CREATE TABLE b08_PF_ESPECIALIZACAO (
 	pf_pe_nusp 			int NOT NULL check (pf_pe_nusp between 0 and 999999999),
 	status				char(2) CHECK (status IN ('ap','at','in')),
@@ -85,6 +102,7 @@ CREATE TABLE b08_PF_ESPECIALIZACAO (
 		REFERENCES b07_PROFESSOR(pe_nusp)
 );
 
+DROP TABLE IF EXISTS b09_ALUNO;
 CREATE TABLE b09_ALUNO (
 	pe_nusp 			int NOT NULL check (pe_nusp between 0 and 999999999),
 	CONSTRAINT pk_aluno PRIMARY KEY (pe_nusp),
@@ -92,6 +110,7 @@ CREATE TABLE b09_ALUNO (
 		REFERENCES b05_PESSOA(nusp)
 );
 
+DROP TABLE IF EXISTS b10_ADMINISTRADOR;
 CREATE TABLE b10_ADMINISTRADOR (
 	pe_nusp 			int NOT NULL check (pe_nusp between 0 and 999999999),
 	email				varchar(30),
@@ -100,6 +119,7 @@ CREATE TABLE b10_ADMINISTRADOR (
 		REFERENCES b05_PESSOA(nusp)
 );
 
+DROP TABLE IF EXISTS b11_DISCIPLINA;
 CREATE TABLE b11_DISCIPLINA (
 	data_inicio			char(4) NOT NULL,
 	departamento		char(3) NOT NULL,
@@ -111,6 +131,8 @@ CREATE TABLE b11_DISCIPLINA (
 	CONSTRAINT pk_disciplina PRIMARY KEY (data_inicio, departamento, codigo)
 
 );
+
+DROP TABLE IF EXISTS b12_MODULO;
 CREATE TABLE b12_MODULO (
 	mod_id 			SERIAL,
 	ano 			char(4) NOT NULL,
@@ -118,6 +140,7 @@ CREATE TABLE b12_MODULO (
 	CONSTRAINT pk_modulo PRIMARY KEY (mod_id)
 );
 
+DROP TABLE IF EXISTS b13_TRILHA;
 CREATE TABLE b13_TRILHA (
 	tri_id				SERIAL,
 	nome				varchar(100) NOT NULL,
@@ -127,12 +150,14 @@ CREATE TABLE b13_TRILHA (
 	CONSTRAINT pk_trilha PRIMARY KEY (tri_id)
 );
 
+DROP TABLE IF EXISTS b14_CURRICULO;
 CREATE TABLE b14_CURRICULO (
 	codigo				int NOT NULL,
 	curso				varchar(100) NOT NULL,
 	CONSTRAINT pk_curriculo PRIMARY KEY (codigo)
 );
 
+DROP TABLE IF EXISTS b15_REL_AL_CUR;
 CREATE TABLE b15_REL_AL_CUR (
 	al_pe_nusp			int NOT NULL check (al_pe_nusp between 0 and 999999999),
 	cur_codigo			int NOT NULL,
@@ -145,6 +170,8 @@ CREATE TABLE b15_REL_AL_CUR (
 		REFERENCES b14_CURRICULO(codigo)
 	
 );
+
+DROP TABLE IF EXISTS b16_REL_CUR_TRI;
 CREATE TABLE b16_REL_CUR_TRI (
 	cur_codigo			int NOT NULL,
 	tri_tri_id			int NOT NULL,
@@ -156,6 +183,7 @@ CREATE TABLE b16_REL_CUR_TRI (
 		REFERENCES b14_CURRICULO(codigo)
 );
 
+DROP TABLE IF EXISTS b17_TR_MO;
 CREATE TABLE b17_TR_MO (
 	tri_tri_id			int NOT NULL,
 	mo_mod_id			int NOT NULL,
@@ -169,6 +197,7 @@ CREATE TABLE b17_TR_MO (
 		REFERENCES b12_MODULO(mod_id)
 );
 
+DROP TABLE IF EXISTS b18_REL_DIS_MOD;
 CREATE TABLE b18_REL_DIS_MOD (
 	mo_mod_id			int NOT NULL,
 	dis_data_inicio		char(4) NOT NULL,
@@ -182,6 +211,7 @@ CREATE TABLE b18_REL_DIS_MOD (
 		REFERENCES b11_DISCIPLINA(data_inicio, departamento, codigo)
 );
 
+DROP TABLE IF EXISTS b19_PLANEJA;
 CREATE TABLE b19_PLANEJA (
 	al_pe_nusp			int NOT NULL check (al_pe_nusp between 0 and 999999999),
 	dis_data_inicio		char(4) NOT NULL,
@@ -189,7 +219,6 @@ CREATE TABLE b19_PLANEJA (
 	dis_codigo			char(4) NOT NULL,
 	ano					char(4) NOT NULL,
 	semestre			int NOT NULL check (semestre between 1 and 2),
-	prioridade			int NOT NULL check (prioridade >= 0),
 	CONSTRAINT pk_planeja PRIMARY KEY (al_pe_nusp, dis_data_inicio, dis_departamento, dis_codigo),
 	CONSTRAINT fk_planeja01 FOREIGN KEY (al_pe_nusp)
 		REFERENCES b09_ALUNO(pe_nusp),
@@ -197,6 +226,7 @@ CREATE TABLE b19_PLANEJA (
 		REFERENCES b11_DISCIPLINA(data_inicio, departamento, codigo)
 );
 
+DROP TABLE IF EXISTS b20_MINISTRA;
 CREATE TABLE b20_MINISTRA (
 	pf_pe_nusp			int NOT NULL check (pf_pe_nusp between 0 and 999999999),
 	dis_data_inicio		char(4) NOT NULL,
@@ -209,12 +239,12 @@ CREATE TABLE b20_MINISTRA (
 		REFERENCES b11_DISCIPLINA(data_inicio, departamento, codigo)
 );
 
+DROP TABLE IF EXISTS b21_ADMINISTRA;
 CREATE TABLE b21_ADMINISTRA (
 	ad_pe_nusp			int NOT NULL check (ad_pe_nusp between 0 and 999999999),
 	cur_codigo			int NOT NULL,
 	inicio_gestao		DATE NOT NULL,
 	fim_gestao			DATE,
-	status				char(1) CHECK (status IN ('A','I')),
 	CONSTRAINT pk_adminsitra PRIMARY KEY (ad_pe_nusp, cur_codigo),
 	CONSTRAINT fk_adminsitra01 FOREIGN KEY (ad_pe_nusp)
 		REFERENCES b10_ADMINISTRADOR(pe_nusp),
@@ -222,6 +252,7 @@ CREATE TABLE b21_ADMINISTRA (
 		REFERENCES b14_CURRICULO(codigo)
 );
 
+DROP TABLE IF EXISTS b22_OFERECIMENTO;
 CREATE TABLE b22_OFERECIMENTO (
 	pf_pe_nusp			int NOT NULL check (pf_pe_nusp between 0 and 999999999),
 	dis_data_inicio		char(4) NOT NULL,
@@ -229,9 +260,6 @@ CREATE TABLE b22_OFERECIMENTO (
 	dis_codigo			char(4) NOT NULL,
 	semestre			int NOT NULL check (semestre between 1 and 2),
 	ano					int NOT NULL check (ano >= 1827),
-	sala				varchar(10) NOT NULL,
-	horario				varchar(100) NOT NULL,
-	local				varchar(30) NOT NULL,
 	CONSTRAINT pk_oferecimento PRIMARY KEY (pf_pe_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano),
 	CONSTRAINT fk_oferecimento01 FOREIGN KEY (pf_pe_nusp)
 		REFERENCES b07_PROFESSOR(pe_nusp),
@@ -239,6 +267,7 @@ CREATE TABLE b22_OFERECIMENTO (
 		REFERENCES b11_DISCIPLINA(data_inicio, departamento, codigo)
 );
 
+DROP TABLE IF EXISTS b23_CURSA;
 CREATE TABLE b23_CURSA (
 	al_pe_nusp				int NOT NULL check (al_pe_nusp between 0 and 999999999),
 	of_pf_pe_nusp			int NOT NULL check (of_pf_pe_nusp between 0 and 999999999),
