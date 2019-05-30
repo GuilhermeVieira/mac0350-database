@@ -50,10 +50,10 @@ CREATE TABLE b03_PF_SE (
 
 DROP TABLE IF EXISTS b04_US_PF;
 CREATE TABLE b04_US_PF (
-	us_login 			varchar(20),
+	us_id 				int,
 	pf_tipo 			varchar(280),
-	CONSTRAINT pk_us_pf PRIMARY KEY (us_login, pf_tipo),
-	CONSTRAINT fk_us_pf2 FOREIGN KEY (us_login)
+	CONSTRAINT pk_us_pf PRIMARY KEY (us_id, pf_tipo),
+	CONSTRAINT fk_us_pf2 FOREIGN KEY (us_id)
 		REFERENCES users(us_id),
 	CONSTRAINT fk_us_pf3 FOREIGN KEY (pf_tipo)
 		REFERENCES b01_PERFIL(tipo)
@@ -63,43 +63,25 @@ CREATE TABLE b04_US_PF (
 DROP TABLE IF EXISTS b05_PESSOA;
 CREATE TABLE b05_PESSOA (
 	nusp 				int NOT NULL check (nusp between 0 and 999999999),
-	us_login 			varchar(20),
-	pnome varchar(280),
-	CONSTRAINT pk_pessoa PRIMARY KEY (nusp),
-	CONSTRAINT fk_pessoa FOREIGN KEY (us_login)
-		REFERENCES users(us_id)
-);
-
-DROP TABLE IF EXISTS b06_PE_SNOME;
-CREATE TABLE b06_PE_SNOME (
-	pe_nusp 			int NOT NULL check (pe_nusp between 0 and 999999999),
+	us_id 				int,
+	pnome 				varchar(280),
 	snome 				varchar(280),
-	CONSTRAINT pk_pe_snome PRIMARY KEY (pe_nusp, snome),
-	CONSTRAINT fk_pe_snome FOREIGN KEY (pe_nusp)
-		REFERENCES b05_PESSOA(nusp)
+	CONSTRAINT pk_pessoa PRIMARY KEY (nusp),
+	CONSTRAINT fk_pessoa FOREIGN KEY (us_id)
+		REFERENCES users(us_id)
 );
 
 DROP TABLE IF EXISTS b07_PROFESSOR;
 CREATE TABLE b07_PROFESSOR (
 	pe_nusp 			int NOT NULL check (pe_nusp between 0 and 999999999),
 	status				char(2) CHECK (status IN ('ap','at','in')),
-	email				varchar(30),
-	telefone			char(10),
+	email				email,
 	sala 				varchar(15),
 	site				varchar(50),
 	CONSTRAINT pk_professor PRIMARY KEY (pe_nusp),
 	CONSTRAINT fk_professor FOREIGN KEY (pe_nusp)
 		REFERENCES b05_PESSOA(nusp)
 
-);
-
-DROP TABLE IF EXISTS b08_PF_ESPECIALIZACAO;
-CREATE TABLE b08_PF_ESPECIALIZACAO (
-	pf_pe_nusp 			int NOT NULL check (pf_pe_nusp between 0 and 999999999),
-	status				char(2) CHECK (status IN ('ap','at','in')),
-	CONSTRAINT pk_pf_especializacao PRIMARY KEY (pf_pe_nusp, status),
-	CONSTRAINT fk_pf_especializacao FOREIGN KEY (pf_pe_nusp)
-		REFERENCES b07_PROFESSOR(pe_nusp)
 );
 
 DROP TABLE IF EXISTS b09_ALUNO;
@@ -113,7 +95,7 @@ CREATE TABLE b09_ALUNO (
 DROP TABLE IF EXISTS b10_ADMINISTRADOR;
 CREATE TABLE b10_ADMINISTRADOR (
 	pe_nusp 			int NOT NULL check (pe_nusp between 0 and 999999999),
-	email				varchar(30),
+	email				email,
 	CONSTRAINT pk_administrador PRIMARY KEY (pe_nusp),
 	CONSTRAINT fk_administrador FOREIGN KEY (pe_nusp)
 		REFERENCES b05_PESSOA(nusp)
@@ -175,7 +157,7 @@ DROP TABLE IF EXISTS b16_REL_CUR_TRI;
 CREATE TABLE b16_REL_CUR_TRI (
 	cur_codigo			int NOT NULL,
 	tri_tri_id			int NOT NULL,
-	obrigatoria			BOOLEAN NOT NULL DEFAULT TRUE,
+	obrigatoria			BOOLEAN NOT NULL,
 	CONSTRAINT pk_rel_cur_tri PRIMARY KEY (cur_codigo, tri_tri_id),
 	CONSTRAINT fk_rel_cur_tri01 FOREIGN KEY (tri_tri_id)
 		REFERENCES b13_TRILHA(tri_id),
@@ -188,7 +170,7 @@ CREATE TABLE b17_TR_MO (
 	tri_tri_id			int NOT NULL,
 	mo_mod_id			int NOT NULL,
 	min_creds			int NOT NULL check (min_creds between 0 and 1000),
-	obrigatorio			BOOLEAN NOT NULL DEFAULT TRUE,
+	obrigatorio			BOOLEAN NOT NULL,
 	min_dis				int NOT NULL check (min_dis between 0 and 1000),
 	CONSTRAINT pk_tr_mo PRIMARY KEY (tri_tri_id, mo_mod_id),
 	CONSTRAINT fk_tr_mo01 FOREIGN KEY (tri_tri_id)
@@ -203,7 +185,7 @@ CREATE TABLE b18_REL_DIS_MOD (
 	dis_data_inicio		char(4) NOT NULL,
 	dis_departamento	char(3) NOT NULL,
 	dis_codigo			char(4) NOT NULL,
-	obrigatorio			BOOLEAN NOT NULL DEFAULT TRUE,
+	obrigatorio			BOOLEAN NOT NULL,
 	CONSTRAINT pk_rel_dis_mod PRIMARY KEY (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo),
 	CONSTRAINT fk_rel_dis_mod01 FOREIGN KEY (mo_mod_id)
 		REFERENCES b12_MODULO(mod_id),
@@ -243,8 +225,8 @@ DROP TABLE IF EXISTS b21_ADMINISTRA;
 CREATE TABLE b21_ADMINISTRA (
 	ad_pe_nusp			int NOT NULL check (ad_pe_nusp between 0 and 999999999),
 	cur_codigo			int NOT NULL,
-	inicio_gestao		DATE NOT NULL,
-	fim_gestao			DATE,
+	inicio_gestao		char(4) NOT NULL,
+	fim_gestao			char(4),
 	CONSTRAINT pk_adminsitra PRIMARY KEY (ad_pe_nusp, cur_codigo),
 	CONSTRAINT fk_adminsitra01 FOREIGN KEY (ad_pe_nusp)
 		REFERENCES b10_ADMINISTRADOR(pe_nusp),

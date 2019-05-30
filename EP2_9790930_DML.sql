@@ -13,29 +13,30 @@
 -- INSERT INTO table () VALUES ();
 -- INSERT INTO table () VALUES ();
 
--- b05_PESSOA
-INSERT INTO b05_PESSOA (nusp, us_login, pnome) VALUES (1, 'bob', 'Roberto');
-INSERT INTO b05_PESSOA (nusp, us_login, pnome) VALUES (2, 'glorb', 'Gilberto');
-INSERT INTO b05_PESSOA (nusp, us_login, pnome) VALUES (3, 'blarb', 'Pedro');
-INSERT INTO b05_PESSOA (nusp, us_login, pnome) VALUES (4, 'snake', 'João');
-INSERT INTO b05_PESSOA (nusp, us_login, pnome) VALUES (5, 'tallica', 'James');
-INSERT INTO b05_PESSOA (nusp, us_login, pnome) VALUES (6, 'mengao', 'Guilherme');
-INSERT INTO b05_PESSOA (nusp, us_login, pnome) VALUES (7, 'forbnite', 'Jose');
-INSERT INTO b05_PESSOA (nusp, us_login, pnome) VALUES (8, 'ze', 'Luis');
-INSERT INTO b05_PESSOA (nusp, us_login, pnome) VALUES (9, 'carlao', 'Carlos');
-INSERT INTO b05_PESSOA (nusp, us_login, pnome) VALUES (10, 'tonho', 'Carlos');
+-- users
+INSERT INTO users (us_email, us_password) VALUES ('bob@bobson.com', 'ashuidgfashjkgd');
+INSERT INTO users (us_email, us_password) VALUES ('glorb@bobson.com', 'ashuidgfashjkgd');
+INSERT INTO users (us_email, us_password) VALUES ('blarb@bobson.com', 'ashuidgfashjkgd');
+INSERT INTO users (us_email, us_password) VALUES ('snake@bobson.com', 'ashuidgfashjkgd');
+INSERT INTO users (us_email, us_password) VALUES ('tallica@bobson.com', 'ashuidgfashjkgd');
+INSERT INTO users (us_email, us_password) VALUES ('mengao@bobson.com', 'ashuidgfashjkgd');
+INSERT INTO users (us_email, us_password) VALUES ('forbnite@bobson.com', 'ashuidgfashjkgd');
+INSERT INTO users (us_email, us_password) VALUES ('ze@bobson.com', 'ashuidgfashjkgd');
+INSERT INTO users (us_email, us_password) VALUES ('carlao@bobson.com', 'ashuidgfashjkgd');
+INSERT INTO users (us_email, us_password) VALUES ('tonho@bobson.com', 'ashuidgfashjkgd');
 
--- b06_PE_SNOME
-INSERT INTO b06_PE_SNOME (pe_nusp, snome) VALUES (1, 'da Guia');
-INSERT INTO b06_PE_SNOME (pe_nusp, snome) VALUES (2, 'Mercos');
-INSERT INTO b06_PE_SNOME (pe_nusp, snome) VALUES (3, 'Tavares');
-INSERT INTO b06_PE_SNOME (pe_nusp, snome) VALUES (4, 'Guets');
-INSERT INTO b06_PE_SNOME (pe_nusp, snome) VALUES (5, 'Hetfield');
-INSERT INTO b06_PE_SNOME (pe_nusp, snome) VALUES (6, 'da Silva de Carvalho');
-INSERT INTO b06_PE_SNOME (pe_nusp, snome) VALUES (7, 'Augusto de Oliveira');
-INSERT INTO b06_PE_SNOME (pe_nusp, snome) VALUES (8, 'Gomes');
-INSERT INTO b06_PE_SNOME (pe_nusp, snome) VALUES (9, 'Ferreira');
-INSERT INTO b06_PE_SNOME (pe_nusp, snome) VALUES (10, 'da Lua');
+
+-- b05_PESSOA
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 1, us_id, 'Roberto', 'da Guia' FROM users WHERE email='bob@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 2, us_id, 'Gilberto', 'Mercos' FROM users WHERE email='glorb@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 3, us_id, 'Pedro', 'Tavares' FROM users WHERE email='blarb@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 4, us_id, 'João', 'Guets' FROM users WHERE email='snake@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 5, us_id, 'James', 'Hetfield' FROM users WHERE email='tallica@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 6, us_id, 'Guilherme', 'da Silva de Carvalho' FROM users WHERE email='mengao@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 7, us_id, 'Jose', 'Augusto de Oliveira' FROM users WHERE email='forbnite@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 8, us_id, 'Luis', 'Gomes' FROM users WHERE email='ze@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 9, us_id, 'Carlos', 'Ferreira' FROM users WHERE email='carlao@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 10, us_id, 'Carlos', 'da Lua' FROM users WHERE email='tonho@bobson.com';
 
 -- b07_PROFESSOR
 INSERT INTO b07_PROFESSOR (pe_nusp, status, email, sala, site) VALUES (1, 'at', 'bob@ime.usp.br', 'A214', 'ime.usp.br/~bob');
@@ -134,16 +135,16 @@ INSERT INTO b15_REL_AL_CUR (al_pe_nusp, cur_codigo, data_ingresso, status) VALUE
 INSERT INTO b15_REL_AL_CUR (al_pe_nusp, cur_codigo, data_ingresso, status) VALUES (10, 7, 2018, 'A');
 
 -- b16_REL_CUR_TRI
-INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 1, tri_id, FALSE FROM b13_TRILHA WHERE  nome = 'Obrigatoria' LIMIT 1;
-INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 2, tri_id, TRUE FROM b13_TRILHA WHERE  nome = 'IA';
-INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 3, tri_id, TRUE FROM b13_TRILHA WHERE  nome = 'Teoria';
-INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 4, tri_id, FALSE FROM b13_TRILHA WHERE  nome = 'Obrigatoria' LIMIT 1;
-INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 5, tri_id, FALSE FROM b13_TRILHA WHERE  nome = 'Sisteminhas';
-INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 5, tri_id, TRUE FROM b13_TRILHA WHERE  nome = 'Optativa eletiva';
-INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 5, tri_id, TRUE FROM b13_TRILHA WHERE  nome = 'Sisteminhas';
-INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 8, tri_id, FALSE FROM b13_TRILHA WHERE  nome = 'Aquela la';
-INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 10, tri_id, TRUE FROM b13_TRILHA WHERE  nome = 'Obrigatoria';
-INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 10, tri_id, TRUE FROM b13_TRILHA WHERE  nome = 'Aquela la';
+INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 1, tri_id, FALSE FROM b13_TRILHA WHERE nome = 'Obrigatoria' LIMIT 1;
+INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 2, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'IA';
+INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 3, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'Teoria';
+INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 4, tri_id, FALSE FROM b13_TRILHA WHERE nome = 'Obrigatoria' LIMIT 1;
+INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 5, tri_id, FALSE FROM b13_TRILHA WHERE nome = 'Sisteminhas';
+INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 5, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'Optativa eletiva';
+INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 5, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'Sisteminhas';
+INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 8, tri_id, FALSE FROM b13_TRILHA WHERE nome = 'Aquela la';
+INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 10, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'Obrigatoria';
+INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 10, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'Aquela la';
 
 -- b17_TR_MO
 INSERT INTO b17_TR_MO (tri_tri_id, mo_mod_id, min_creds, obrigatorio, min_dis) SELECT tri_id, mod_id, 10, TRUE, 1000 FROM b13_TRILHA tr, b12_MODULO mo WHERE tr.nome = 'Direito Contitucional' AND mo.nome = 'Obrigatorias' LIMIT 1;
