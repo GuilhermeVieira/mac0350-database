@@ -1,0 +1,8 @@
+-- Pegar todos os currículos que um administrador administra
+-- Pegar todos os currículos que um aluno está matriculado/já terminou
+-- Pegar todos os oferecimentos que um professor ofereceu em determinado semestre
+-- Pegar todas as disciplinas que foram oferecidas em determinado semestre, junto o professor que ministrou elas
+-- Pegar todas as disciplinas que um aluno cursou em determiado semestre, junto com status e nota
+-- Pegar todas as disciplinas que um aluno deseja cursar, junto com o ano e o semestre planejado
+-- Pegar todas as disciplinas de um currículo, junto com suas respectivas trilhas e módulos (se uma disciplina pertence a duas trilhas/módulos, incluir ela duas vezes)
+-- Pegar infos sobre uma disciplina, colocando o prefixo do jupiterweb no atributo jupiter_link

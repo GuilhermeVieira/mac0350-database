@@ -1,6 +1,6 @@
-CREATE OR REPLACE FUNCTION adciona_pessoa(nusp INT, us_login INT, pnome, snome) RETURNS VOID
+CREATE OR REPLACE FUNCTION adciona_pessoa(nusp INT, us_login INT, pnome VARCHAR(280), snome VARCHAR(280)) RETURNS VOID
     AS $$ BEGIN
-        INSERT INTO b05_PESSOA (nusp, us_login, pnome VARCHAR(280), snome VARCHAR(280)) VALUES ($1, $2, $3);
+        INSERT INTO b05_PESSOA (nusp, us_login, pnome, snome) VALUES ($1, $2, $3);
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER

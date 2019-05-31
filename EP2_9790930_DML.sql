@@ -5,7 +5,7 @@
 -- INSERT INTO table () VALUES ();
 -- INSERT INTO table () VALUES ();
 -- INSERT INTO table () VALUES ();
--- INSERT INTO table () VALUES ();
+-- INSERT INTO table () VALUES ();\
 -- INSERT INTO table () VALUES ();
 -- INSERT INTO table () VALUES ();
 -- INSERT INTO table () VALUES ();
@@ -27,16 +27,16 @@ INSERT INTO users (us_email, us_password) VALUES ('tonho@bobson.com', 'ashuidgfa
 
 
 -- b05_PESSOA
-INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 1, us_id, 'Roberto', 'da Guia' FROM users WHERE email='bob@bobson.com';
-INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 2, us_id, 'Gilberto', 'Mercos' FROM users WHERE email='glorb@bobson.com';
-INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 3, us_id, 'Pedro', 'Tavares' FROM users WHERE email='blarb@bobson.com';
-INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 4, us_id, 'João', 'Guets' FROM users WHERE email='snake@bobson.com';
-INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 5, us_id, 'James', 'Hetfield' FROM users WHERE email='tallica@bobson.com';
-INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 6, us_id, 'Guilherme', 'da Silva de Carvalho' FROM users WHERE email='mengao@bobson.com';
-INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 7, us_id, 'Jose', 'Augusto de Oliveira' FROM users WHERE email='forbnite@bobson.com';
-INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 8, us_id, 'Luis', 'Gomes' FROM users WHERE email='ze@bobson.com';
-INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 9, us_id, 'Carlos', 'Ferreira' FROM users WHERE email='carlao@bobson.com';
-INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 10, us_id, 'Carlos', 'da Lua' FROM users WHERE email='tonho@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 1, us_id, 'Roberto', 'da Guia' FROM users WHERE us_email='bob@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 2, us_id, 'Gilberto', 'Mercos' FROM users WHERE us_email='glorb@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 3, us_id, 'Pedro', 'Tavares' FROM users WHERE us_email='blarb@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 4, us_id, 'João', 'Guets' FROM users WHERE us_email='snake@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 5, us_id, 'James', 'Hetfield' FROM users WHERE us_email='tallica@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 6, us_id, 'Guilherme', 'da Silva de Carvalho' FROM users WHERE us_email='mengao@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 7, us_id, 'Jose', 'Augusto de Oliveira' FROM users WHERE us_email='forbnite@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 8, us_id, 'Luis', 'Gomes' FROM users WHERE us_email='ze@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 9, us_id, 'Carlos', 'Ferreira' FROM users WHERE us_email='carlao@bobson.com';
+INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 10, us_id, 'Carlos', 'da Lua' FROM users WHERE us_email='tonho@bobson.com';
 
 -- b07_PROFESSOR
 INSERT INTO b07_PROFESSOR (pe_nusp, status, email, sala, site) VALUES (1, 'at', 'bob@ime.usp.br', 'A214', 'ime.usp.br/~bob');
@@ -47,7 +47,7 @@ INSERT INTO b07_PROFESSOR (pe_nusp, status, email, sala, site) VALUES (5, 'at', 
 INSERT INTO b07_PROFESSOR (pe_nusp, status, email, sala, site) VALUES (6, 'at', 'santista76@ime.usp.br', 'D324', 'ime.usp.br/~santista76');
 INSERT INTO b07_PROFESSOR (pe_nusp, status, email, sala, site) VALUES (7, 'at', 'ze@ime.usp.br', 'C198', 'ime.usp.br/~ze');
 INSERT INTO b07_PROFESSOR (pe_nusp, status, email, sala, site) VALUES (8, 'at', 'ze91@ime.usp.br', 'A123', 'ime.usp.br/~ze91');
-INSERT INTO b07_PROFESSOR (pe_nusp, status, email, sala, site) VALUES (9, 'at', 'cf@ime.usp.br', 'ime.usp.br/~cf');
+INSERT INTO b07_PROFESSOR (pe_nusp, status, email, sala, site) VALUES (9, 'at', 'cf@ime.usp.br', 'B234', 'ime.usp.br/~cf');
 INSERT INTO b07_PROFESSOR (pe_nusp, status, email, sala, site) VALUES (10, 'at', 'mitojr@ime.usp.br', 'A234', 'ime.usp.br/~mitojr');
 
 -- b09_ALUNO
@@ -141,7 +141,7 @@ INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 3, tri_
 INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 4, tri_id, FALSE FROM b13_TRILHA WHERE nome = 'Obrigatoria' LIMIT 1;
 INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 5, tri_id, FALSE FROM b13_TRILHA WHERE nome = 'Sisteminhas';
 INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 5, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'Optativa eletiva';
-INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 5, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'Sisteminhas';
+INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 5, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'Aquela la';
 INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 8, tri_id, FALSE FROM b13_TRILHA WHERE nome = 'Aquela la';
 INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 10, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'Obrigatoria';
 INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 10, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'Aquela la';
@@ -156,7 +156,7 @@ INSERT INTO b17_TR_MO (tri_tri_id, mo_mod_id, min_creds, obrigatorio, min_dis) S
 INSERT INTO b17_TR_MO (tri_tri_id, mo_mod_id, min_creds, obrigatorio, min_dis) SELECT tri_id, mod_id, 24, TRUE, 25 FROM b13_TRILHA tr, b12_MODULO mo WHERE tr.nome = 'Doidera' AND mo.nome = 'Nabo' LIMIT 1;
 INSERT INTO b17_TR_MO (tri_tri_id, mo_mod_id, min_creds, obrigatorio, min_dis) SELECT tri_id, mod_id, 8, FALSE, 20 FROM b13_TRILHA tr, b12_MODULO mo WHERE tr.nome = 'Teoria' AND mo.nome = 'Obrigatorias' LIMIT 1;
 INSERT INTO b17_TR_MO (tri_tri_id, mo_mod_id, min_creds, obrigatorio, min_dis) SELECT tri_id, mod_id, 20, FALSE, 10 FROM b13_TRILHA tr, b12_MODULO mo WHERE tr.nome = 'Engngerotreco' AND mo.nome = 'Coxa' LIMIT 1;
-INSERT INTO b17_TR_MO (tri_tri_id, mo_mod_id, min_creds, obrigatorio, min_dis) SELECT tri_id, mod_id, 30, TRUE, 10 FROM b13_TRILHA tr, b12_MODULO mo WHERE tr.nome = 'Obrigatoria' AND mo.nome = 'Nabo' LIMIT 1;
+INSERT INTO b17_TR_MO (tri_tri_id, mo_mod_id, min_creds, obrigatorio, min_dis) SELECT tri_id, mod_id, 30, TRUE, 10 FROM b13_TRILHA tr, b12_MODULO mo WHERE tr.nome = 'Obrigatoria' AND mo.nome = 'Coxa' LIMIT 1;
 
 -- b18_REL_DIS_MOD
 INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '1997', 'MAC', '0350', TRUE FROM b12_MODULO WHERE nome = 'Sisteminhas' LIMIT 1;
@@ -196,28 +196,28 @@ INSERT INTO b20_MINISTRA (pf_pe_nusp, dis_data_inicio, dis_departamento, dis_cod
 
 
 -- b21_ADMINISTRA
-INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) VALUES (1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + DAY(1));
-INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) VALUES (1, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + DAY(1));
-INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) VALUES (1, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + DAY(1));
-INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) VALUES (5, 4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) VALUES (5, 5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) VALUES (8, 6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + DAY(1));
-INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) VALUES (9, 7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + DAY(1));
-INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) VALUES (9, 8, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) VALUES (10, 9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + DAY(1));
-INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) VALUES (2, 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) SELECT 1, 1, extract(year from current_timestamp), extract(year from current_timestamp);
+INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) SELECT 1, 2, extract(year from current_timestamp), extract(year from current_timestamp);
+INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) SELECT 1, 3, extract(year from current_timestamp), extract(year from current_timestamp);
+INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) SELECT 5, 4, extract(year from current_timestamp), extract(year from current_timestamp);
+INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) SELECT 5, 5, extract(year from current_timestamp), extract(year from current_timestamp);
+INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) SELECT 8, 6, extract(year from current_timestamp), extract(year from current_timestamp);
+INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) SELECT 9, 7, extract(year from current_timestamp), extract(year from current_timestamp);
+INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) SELECT 9, 8, extract(year from current_timestamp), extract(year from current_timestamp);
+INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) SELECT 10, 9, extract(year from current_timestamp), extract(year from current_timestamp);
+INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) SELECT 2, 10, extract(year from current_timestamp), extract(year from current_timestamp);
 
 -- b21_2_GESTAO
-INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP, 'A');
-INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(1), 'I');
-INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(2), 'I');
-INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(3), 'I');
-INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(4), 'I');
-INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(5), 'I');
-INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(6), 'I');
-INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(7), 'I');
-INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(8), 'I');
-INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(9), 'I');
+--INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP, 'A');
+--INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(1), 'I');
+--INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(2), 'I');
+--INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(3), 'I');
+--INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(4), 'I');
+--INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(5), 'I');
+--INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(6), 'I');
+--INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(7), 'I');
+--INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(8), 'I');
+--INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(9), 'I');
 
 -- b22_OFERECIMENTO
 INSERT INTO b22_OFERECIMENTO (pf_pe_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES (1, '2018','MAT','0256', 1, 2018);
