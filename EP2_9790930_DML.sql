@@ -143,7 +143,7 @@ INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 5, tri_
 INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 5, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'Optativa eletiva';
 INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 5, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'Aquela la';
 INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 8, tri_id, FALSE FROM b13_TRILHA WHERE nome = 'Aquela la';
-INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 10, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'Obrigatoria';
+INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 10, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'Obrigatoria' LIMIT 1;
 INSERT INTO b16_REL_CUR_TRI (cur_codigo, tri_tri_id, obrigatoria) SELECT 10, tri_id, TRUE FROM b13_TRILHA WHERE nome = 'Aquela la';
 
 -- b17_TR_MO
@@ -155,19 +155,19 @@ INSERT INTO b17_TR_MO (tri_tri_id, mo_mod_id, min_creds, obrigatorio, min_dis) S
 INSERT INTO b17_TR_MO (tri_tri_id, mo_mod_id, min_creds, obrigatorio, min_dis) SELECT tri_id, mod_id, 12, TRUE, 995 FROM b13_TRILHA tr, b12_MODULO mo WHERE tr.nome = 'Aquela la' AND mo.nome = 'Coxa' LIMIT 1;
 INSERT INTO b17_TR_MO (tri_tri_id, mo_mod_id, min_creds, obrigatorio, min_dis) SELECT tri_id, mod_id, 24, TRUE, 25 FROM b13_TRILHA tr, b12_MODULO mo WHERE tr.nome = 'Doidera' AND mo.nome = 'Nabo' LIMIT 1;
 INSERT INTO b17_TR_MO (tri_tri_id, mo_mod_id, min_creds, obrigatorio, min_dis) SELECT tri_id, mod_id, 8, FALSE, 20 FROM b13_TRILHA tr, b12_MODULO mo WHERE tr.nome = 'Teoria' AND mo.nome = 'Obrigatorias' LIMIT 1;
-INSERT INTO b17_TR_MO (tri_tri_id, mo_mod_id, min_creds, obrigatorio, min_dis) SELECT tri_id, mod_id, 20, FALSE, 10 FROM b13_TRILHA tr, b12_MODULO mo WHERE tr.nome = 'Engngerotreco' AND mo.nome = 'Coxa' LIMIT 1;
+INSERT INTO b17_TR_MO (tri_tri_id, mo_mod_id, min_creds, obrigatorio, min_dis) SELECT tri_id, mod_id, 20, FALSE, 10 FROM b13_TRILHA tr, b12_MODULO mo WHERE tr.nome = 'Engengerotreco' AND mo.nome = 'Coxa' LIMIT 1;
 INSERT INTO b17_TR_MO (tri_tri_id, mo_mod_id, min_creds, obrigatorio, min_dis) SELECT tri_id, mod_id, 30, TRUE, 10 FROM b13_TRILHA tr, b12_MODULO mo WHERE tr.nome = 'Obrigatoria' AND mo.nome = 'Coxa' LIMIT 1;
 
 -- b18_REL_DIS_MOD
-INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '1997', 'MAC', '0350', TRUE FROM b12_MODULO WHERE nome = 'Sisteminhas' LIMIT 1;
-INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '2018', 'MAT', '0256', TRUE FROM b12_MODULO WHERE nome = 'Sisteminhas' LIMIT 1;
+INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '1997', 'MAC', '0350', TRUE FROM b12_MODULO WHERE nome = 'Sistemas' LIMIT 1;
+INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '2018', 'MAT', '0256', TRUE FROM b12_MODULO WHERE nome = 'Sistemas' LIMIT 1;
 INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '2011', 'MAE', '9889', TRUE FROM b12_MODULO WHERE nome = 'Pura' LIMIT 1;
 INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '1997', 'MAC', '0350', TRUE FROM b12_MODULO WHERE nome = 'Obrigatorias' LIMIT 1;
 INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '1997', 'MAC', '0350', TRUE FROM b12_MODULO WHERE nome = 'Coxa' LIMIT 1;
-INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '2005', 'MAE', '0666', TRUE FROM b12_MODULO WHERE nome = 'Sisteminhas' LIMIT 1;
+INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '2005', 'MAE', '0666', TRUE FROM b12_MODULO WHERE nome = 'Sistemas' LIMIT 1;
 INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '1981', 'MAT', '0359', TRUE FROM b12_MODULO WHERE nome = 'Robos' LIMIT 1;
 INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '1997', 'MAC', '0350', TRUE FROM b12_MODULO WHERE nome = 'Nabo' LIMIT 1;
-INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '2016', 'MAC', '0300', TRUE FROM b12_MODULO WHERE nome = 'Sisteminhas' LIMIT 1;
+INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '2016', 'MAC', '0300', TRUE FROM b12_MODULO WHERE nome = 'Sistemas' LIMIT 1;
 INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '1993', 'MAC', '0460', TRUE FROM b12_MODULO WHERE nome = 'Data Science' LIMIT 1;
 
 -- b19_PLANEJA

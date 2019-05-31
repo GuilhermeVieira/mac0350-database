@@ -245,7 +245,3 @@ CREATE TABLE IF NOT EXISTS b23_CURSA (
 	CONSTRAINT fk_cursa03 FOREIGN KEY (of_pf_pe_nusp, of_dis_data_inicio, of_dis_departamento, of_dis_codigo, of_semestre, of_ano)
 		REFERENCES b22_OFERECIMENTO(pf_pe_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-
-
-
