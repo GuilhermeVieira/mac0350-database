@@ -76,7 +76,7 @@ INSERT INTO b10_ADMINISTRADOR (pe_nusp, email) VALUES (10, 'mitojr@ime.usp.br');
 
 -- b11_DISCIPLINA
 INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('1987', 'MAE', '0123', 'sgldis=MAE0123', 'Introdução a bob', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '2004');
-INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('1997','MAC','0350', 'sgldis=MAC0350', 'Introdução a JEF', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '2001');
+INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('1997','MAC','0350', 'sgldis=MAC0350', 'Melhor matéria', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '2001');
 INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('2005','MAC','0121', 'sgldis=MAC0121', 'Introdução a algorimos', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', NULL);
 INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('1997','MAC','0425', 'sgldis=MAC0425', 'Robozinho', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '2003');
 INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('2018','MAT','0256', 'sgldis=MAT0256', 'Calc Pi', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', NULL);

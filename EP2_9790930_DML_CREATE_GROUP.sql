@@ -2,6 +2,7 @@
 CREATE OR REPLACE FUNCTION cria_usuario(us_email email, us_password TEXT) RETURNS VOID
     AS $$ BEGIN
         INSERT INTO users (us_email, us_password) VALUES ($1, $2);
+        -- Dar acesso ao perfil do dba (?)
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
@@ -25,10 +26,9 @@ CREATE OR REPLACE FUNCTION vira_professor(pe_nusp INT, status CHAR(2), email ema
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
---TESTED
-CREATE OR REPLACE FUNCTION vira_aluno(al_nusp INT) RETURNS VOID
+CREATE OR REPLACE FUNCTION vira_aluno(pe_nusp INT) RETURNS VOID
     AS $$ BEGIN
-        INSERT INTO b09_ALUNO (al_nusp) VALUES ($1);
+        INSERT INTO b09_ALUNO (pe_nusp) VALUES ($1);
         -- Dar acesso ao perfil de aluno
     END; $$
     LANGUAGE plpgsql
@@ -44,9 +44,10 @@ CREATE OR REPLACE FUNCTION vira_admin(pe_nusp INT, email email) RETURNS VOID
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
-CREATE OR REPLACE FUNCTION adiciona_disciplina(data_inicio CHAR(4), departamento CHAR(3), codigo CHAR(4), jupiter_link VARCHAR(100), nome VARCHAR(100), descricao VARCHAR(100)) RETURNS VOID
+
+CREATE OR REPLACE FUNCTION adiciona_disciplina(data_inicio CHAR(4), departamento CHAR(3), codigo CHAR(4), jupiter_link VARCHAR(100), nome VARCHAR(100), descricao VARCHAR(100), data_fim CHAR(4)) RETURNS VOID
     AS $$ BEGIN
-        INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ($1, $2, $3, $4, $5);
+        INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ($1, $2, $3, $4, $5, $6, $7);
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
@@ -76,7 +77,7 @@ CREATE OR REPLACE FUNCTION adiciona_curriculo(codigo INT, curso VARCHAR(100)) RE
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
-CREATE OR REPLACE FUNCTION inicia_curso(al_pe_nusp INT, cur_codigo INT, data_ingresso CHAR(4)) RETURNS VOID
+CREATE OR REPLACE FUNCTION inicia_curso(al_pe_nusp INT, cur_codigo INT, data_ingresso INT, status CHAR(1)) RETURNS VOID
     AS $$ BEGIN
         INSERT INTO b15_REL_AL_CUR (al_pe_nusp, cur_codigo, data_ingresso, status) VALUES ($1, $2, $3, 'A');
     END; $$
@@ -99,6 +100,8 @@ CREATE OR REPLACE FUNCTION relaciona_trilha_modulo(tri_tri_id INT, mo_mod_id INT
     LANGUAGE plpgsql
     SECURITY DEFINER
     SET search_path FROM CURRENT;
+
+--TESTED
 
 CREATE OR REPLACE FUNCTION relaciona_modulo_disciplina(mo_mod_id INT, dis_data_inicio CHAR(4), dis_departamento CHAR(3), dis_codigo CHAR(4), obrigatorio BOOLEAN) RETURNS VOID
     AS $$ BEGIN
