@@ -1,10 +1,20 @@
-CREATE OR REPLACE FUNCTION adciona_pessoa(nusp INT, us_login INT, pnome VARCHAR(280), snome VARCHAR(280)) RETURNS VOID
+--TESTED
+CREATE OR REPLACE FUNCTION cria_usuario(us_email email, us_password TEXT) RETURNS VOID
     AS $$ BEGIN
-        INSERT INTO b05_PESSOA (nusp, us_login, pnome, snome) VALUES ($1, $2, $3);
+        INSERT INTO users (us_email, us_password) VALUES ($1, $2);
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    --SET search_path FROM CURRENT;
+    SET search_path FROM CURRENT;
+
+CREATE OR REPLACE FUNCTION adiciona_pessoa(nusp INT, us_login INT, pnome VARCHAR(280), snome VARCHAR(280)) RETURNS VOID
+    AS $$ BEGIN
+        INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) VALUES ($1, $2, $3, $4);
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION vira_professor(pe_nusp INT, status CHAR(2), email email, sala VARCHAR(15), site VARCHAR(50)) RETURNS VOID
     AS $$ BEGIN
@@ -13,8 +23,9 @@ CREATE OR REPLACE FUNCTION vira_professor(pe_nusp INT, status CHAR(2), email ema
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
 
+--TESTED
 CREATE OR REPLACE FUNCTION vira_aluno(al_nusp INT) RETURNS VOID
     AS $$ BEGIN
         INSERT INTO b09_ALUNO (al_nusp) VALUES ($1);
@@ -22,7 +33,7 @@ CREATE OR REPLACE FUNCTION vira_aluno(al_nusp INT) RETURNS VOID
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION vira_admin(pe_nusp INT, email email) RETURNS VOID
     AS $$ BEGIN
@@ -31,7 +42,7 @@ CREATE OR REPLACE FUNCTION vira_admin(pe_nusp INT, email email) RETURNS VOID
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION adiciona_disciplina(data_inicio CHAR(4), departamento CHAR(3), codigo CHAR(4), jupiter_link VARCHAR(100), nome VARCHAR(100), descricao VARCHAR(100)) RETURNS VOID
     AS $$ BEGIN
@@ -39,7 +50,7 @@ CREATE OR REPLACE FUNCTION adiciona_disciplina(data_inicio CHAR(4), departamento
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION adiciona_modulo(ano CHAR(4), nome VARCHAR(100)) RETURNS VOID
     AS $$ BEGIN
@@ -47,7 +58,7 @@ CREATE OR REPLACE FUNCTION adiciona_modulo(ano CHAR(4), nome VARCHAR(100)) RETUR
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION adiciona_trilha(nome varchar(100), ano CHAR(4), min_mods INT, min_dis INT) RETURNS VOID
     AS $$ BEGIN
@@ -55,7 +66,7 @@ CREATE OR REPLACE FUNCTION adiciona_trilha(nome varchar(100), ano CHAR(4), min_m
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION adiciona_curriculo(codigo INT, curso VARCHAR(100)) RETURNS VOID
     AS $$ BEGIN
@@ -63,7 +74,7 @@ CREATE OR REPLACE FUNCTION adiciona_curriculo(codigo INT, curso VARCHAR(100)) RE
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION inicia_curso(al_pe_nusp INT, cur_codigo INT, data_ingresso CHAR(4)) RETURNS VOID
     AS $$ BEGIN
@@ -71,7 +82,7 @@ CREATE OR REPLACE FUNCTION inicia_curso(al_pe_nusp INT, cur_codigo INT, data_ing
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION relaciona_curriculo_trilha(cur_codigo INT, tri_tri_id INT, obrigatoria BOOLEAN) RETURNS VOID
     AS $$ BEGIN
@@ -79,7 +90,7 @@ CREATE OR REPLACE FUNCTION relaciona_curriculo_trilha(cur_codigo INT, tri_tri_id
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION relaciona_trilha_modulo(tri_tri_id INT, mo_mod_id INT, min_creds INT, obrigatorio BOOLEAN, min_dis INT) RETURNS VOID
     AS $$ BEGIN
@@ -87,7 +98,7 @@ CREATE OR REPLACE FUNCTION relaciona_trilha_modulo(tri_tri_id INT, mo_mod_id INT
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION relaciona_modulo_disciplina(mo_mod_id INT, dis_data_inicio CHAR(4), dis_departamento CHAR(3), dis_codigo CHAR(4), obrigatorio BOOLEAN) RETURNS VOID
     AS $$ BEGIN
@@ -95,7 +106,7 @@ CREATE OR REPLACE FUNCTION relaciona_modulo_disciplina(mo_mod_id INT, dis_data_i
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION planeja_disciplina(al_nusp INT, dis_data_inicio CHAR(4), dis_departamento CHAR(3), dis_codigo CHAR(4), pl_ano CHAR(4), pl_semestre INT) RETURNS VOID
     AS $$ BEGIN
@@ -103,7 +114,7 @@ CREATE OR REPLACE FUNCTION planeja_disciplina(al_nusp INT, dis_data_inicio CHAR(
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION inicia_ministracao(pf_pe_nusp INT, dis_data_inicio CHAR(4), dis_departamento CHAR(3), dis_codigo CHAR(4)) RETURNS VOID
     AS $$ BEGIN
@@ -111,7 +122,7 @@ CREATE OR REPLACE FUNCTION inicia_ministracao(pf_pe_nusp INT, dis_data_inicio CH
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION inicia_administracao(ad_pe_nusp INT, cur_codigo INT) RETURNS VOID
     AS $$ BEGIN
@@ -119,7 +130,7 @@ CREATE OR REPLACE FUNCTION inicia_administracao(ad_pe_nusp INT, cur_codigo INT) 
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION oferece_ministracao(pe_nusp INT, dis_data_inicio CHAR(4), dis_departamento CHAR(3), dis_codigo CHAR(4), semestre INT, ano INT) RETURNS VOID
     AS $$ BEGIN
@@ -127,7 +138,7 @@ CREATE OR REPLACE FUNCTION oferece_ministracao(pe_nusp INT, dis_data_inicio CHAR
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION cursa_disciplina(al_nusp INT, pe_nusp INT, dis_data_inicio CHAR(4), dis_departamento CHAR(3), dis_codigo CHAR(4), of_semestre INT, of_ano CHAR(4), nota REAL, status CHAR(1)) RETURNS VOID
     AS $$ BEGIN
@@ -135,4 +146,4 @@ CREATE OR REPLACE FUNCTION cursa_disciplina(al_nusp INT, pe_nusp INT, dis_data_i
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = admins, pg_temp;
+    SET search_path FROM CURRENT;
