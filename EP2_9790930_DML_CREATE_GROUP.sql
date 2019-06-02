@@ -1,4 +1,5 @@
---TESTED
+-- ALL FUNCTIONS TESTED
+
 CREATE OR REPLACE FUNCTION cria_usuario(us_email email, us_password TEXT) RETURNS VOID
     AS $$ BEGIN
         INSERT INTO users (us_email, us_password) VALUES ($1, $2);
@@ -101,8 +102,6 @@ CREATE OR REPLACE FUNCTION relaciona_trilha_modulo(tri_tri_id INT, mo_mod_id INT
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
---TESTED
-
 CREATE OR REPLACE FUNCTION relaciona_modulo_disciplina(mo_mod_id INT, dis_data_inicio CHAR(4), dis_departamento CHAR(3), dis_codigo CHAR(4), obrigatorio BOOLEAN) RETURNS VOID
     AS $$ BEGIN
         INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) VALUES ($1, $2, $3, $4, $5);
@@ -143,7 +142,7 @@ CREATE OR REPLACE FUNCTION oferece_ministracao(pe_nusp INT, dis_data_inicio CHAR
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
-CREATE OR REPLACE FUNCTION cursa_disciplina(al_nusp INT, pe_nusp INT, dis_data_inicio CHAR(4), dis_departamento CHAR(3), dis_codigo CHAR(4), of_semestre INT, of_ano CHAR(4), nota REAL, status CHAR(1)) RETURNS VOID
+CREATE OR REPLACE FUNCTION cursa_disciplina(al_nusp INT, pf_nusp INT, dis_data_inicio CHAR(4), dis_departamento CHAR(3), dis_codigo CHAR(4), of_semestre INT, of_ano INT, nota REAL, status CHAR(1)) RETURNS VOID
     AS $$ BEGIN
         INSERT INTO b23_CURSA (al_pe_nusp, of_pf_pe_nusp, of_dis_data_inicio, of_dis_departamento, of_dis_codigo, of_semestre, of_ano, nota, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
     END; $$
