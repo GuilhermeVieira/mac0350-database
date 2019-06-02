@@ -207,7 +207,7 @@ CREATE TABLE IF NOT EXISTS b21_ADMINISTRA (
 	cur_codigo			int NOT NULL,
 	inicio_gestao		char(4) NOT NULL,
 	fim_gestao			char(4),
-	CONSTRAINT pk_adminsitra PRIMARY KEY (ad_pe_nusp, cur_codigo),
+	CONSTRAINT pk_adminsitra PRIMARY KEY (ad_pe_nusp, cur_codigo, inicio_gestao),
 	CONSTRAINT fk_adminsitra01 FOREIGN KEY (ad_pe_nusp)
 		REFERENCES b10_ADMINISTRADOR(pe_nusp) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT fk_adminsitra02 FOREIGN KEY (cur_codigo)

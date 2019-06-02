@@ -26,7 +26,7 @@ SELECT remove_planejamento(11, '1997', 'MAC', '0350');
 
 SELECT remove_ministracao(11, '1997', 'MAC', '0425'); 
 
-SELECT remove_administracao(11, 9);
+SELECT remove_administracao(11, 11, '2013');
 
 SELECT remove_ministra(11, '1997', 'MAC', '0350', 1, 2019);
 

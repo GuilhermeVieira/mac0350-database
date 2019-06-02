@@ -16,7 +16,7 @@ SELECT muda_status_aluno_no_curso(8, 5, 2013, 'A');
 
 --b21
 
-SELECT atualiza_encerramento_administracao(1, 1, '2021'); 
+SELECT atualiza_encerramento_administracao(1, 1, '2019', '2021'); 
 
 --b23
 SELECT atualiza_nota_disciplina(1, 1, '2018','MAT','0256', 1, 2018, 7.0);

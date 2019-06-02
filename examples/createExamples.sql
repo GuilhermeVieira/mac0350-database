@@ -28,7 +28,7 @@ SELECT planeja_disciplina(11, '1997', 'MAC', '0350', '2020', 2);
 
 SELECT inicia_ministracao(11, '1997','MAC','0425');
 
-SELECT inicia_administracao(11, 11);
+SELECT inicia_administracao(11, 11, '2013');
 
 SELECT oferece_ministracao(11, '1997','MAC','0350', 1, 2019);
 

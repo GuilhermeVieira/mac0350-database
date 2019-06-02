@@ -126,9 +126,9 @@ CREATE OR REPLACE FUNCTION inicia_ministracao(pf_pe_nusp INT, dis_data_inicio CH
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
-CREATE OR REPLACE FUNCTION inicia_administracao(ad_pe_nusp INT, cur_codigo INT) RETURNS VOID
+CREATE OR REPLACE FUNCTION inicia_administracao(ad_pe_nusp INT, cur_codigo INT, inicio_gestao CHAR(4)) RETURNS VOID
     AS $$ BEGIN
-        INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) VALUES ($1, $2, (SELECT EXTRACT(YEAR FROM CURRENT_DATE))::CHAR(4), NULL);
+        INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) VALUES ($1, $2, $3, NULL);
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER

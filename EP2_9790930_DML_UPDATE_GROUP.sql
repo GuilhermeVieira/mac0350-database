@@ -40,9 +40,9 @@ CREATE OR REPLACE FUNCTION muda_status_aluno_no_curso(al_pe_nusp INT, cur_codigo
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
-CREATE OR REPLACE FUNCTION atualiza_encerramento_administracao(ad_pe_nusp INT, cur_codigo INT, fim_gestao CHAR(4)) RETURNS VOID
+CREATE OR REPLACE FUNCTION atualiza_encerramento_administracao(ad_pe_nusp INT, cur_codigo INT, inicio_gestao CHAR(4), fim_gestao CHAR(4)) RETURNS VOID
     AS $$ BEGIN
-        UPDATE b21_ADMINISTRA SET fim_gestao=$3 WHERE b21_ADMINISTRA.ad_pe_nusp=$1 AND b21_ADMINISTRA.cur_codigo=$2;
+        UPDATE b21_ADMINISTRA SET fim_gestao=$4 WHERE b21_ADMINISTRA.ad_pe_nusp=$1 AND b21_ADMINISTRA.cur_codigo=$2 AND b21_ADMINISTRA.inicio_gestao=$3;
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER

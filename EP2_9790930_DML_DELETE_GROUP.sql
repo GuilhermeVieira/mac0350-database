@@ -115,9 +115,9 @@ CREATE OR REPLACE FUNCTION remove_ministracao(pf_pe_nusp INT, dis_data_inicio CH
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
-CREATE OR REPLACE FUNCTION remove_administracao(ad_pe_nusp INT, cur_codigo INT) RETURNS VOID
+CREATE OR REPLACE FUNCTION remove_administracao(ad_pe_nusp INT, cur_codigo INT, inicio_gestao CHAR(4)) RETURNS VOID
     AS $$ BEGIN
-        DELETE FROM b21_ADMINISTRA WHERE b21_ADMINISTRA.ad_pe_nusp=$1 AND b21_ADMINISTRA.cur_codigo=$2;
+        DELETE FROM b21_ADMINISTRA WHERE b21_ADMINISTRA.ad_pe_nusp=$1 AND b21_ADMINISTRA.cur_codigo=$2 AND b21_ADMINISTRA.inicio_gestao=$3;
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
