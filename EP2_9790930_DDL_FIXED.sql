@@ -29,18 +29,17 @@ CREATE TABLE IF NOT EXISTS b01_PERFIL (
 );
 
 CREATE TABLE IF NOT EXISTS b02_SERVICO (
-	id SERIAL,
-	nome         		varchar(280),
+	nome         		varchar(280) NOT NULL,
 	descrição   		varchar(280),
-	CONSTRAINT pk_SERVICO PRIMARY KEY (id)
+	CONSTRAINT pk_SERVICO PRIMARY KEY (nome)
 );
 
 CREATE TABLE IF NOT EXISTS b03_PF_SE (
-	pf_tipo 			varchar(280),
-	se_id 				int,
-	CONSTRAINT pk_pf_se PRIMARY KEY (se_id, pf_tipo),
-	CONSTRAINT fk_pf_se1 FOREIGN KEY (se_id)
-		REFERENCES b02_SERVICO(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	pf_tipo 			varchar(280) NOT NULL,
+	se_nome 			varchar(280) NOT NULL,
+	CONSTRAINT pk_pf_se PRIMARY KEY (se_nome, pf_tipo),
+	CONSTRAINT fk_pf_se1 FOREIGN KEY (se_nome)
+		REFERENCES b02_SERVICO(nome) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT fk_pf_se2 FOREIGN KEY (pf_tipo)
 		REFERENCES b01_PERFIL(tipo) ON DELETE CASCADE ON UPDATE CASCADE
 );
