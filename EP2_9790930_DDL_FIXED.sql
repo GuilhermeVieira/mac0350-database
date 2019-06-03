@@ -71,6 +71,8 @@ CREATE TABLE IF NOT EXISTS b07_PROFESSOR (
 	sala 				varchar(15),
 	site				varchar(50),
 	CONSTRAINT pk_professor PRIMARY KEY (pe_nusp),
+	CONSTRAINT sk_professor UNIQUE (email),
+	CONSTRAINT tk_professor UNIQUE (site),
 	CONSTRAINT fk_professor FOREIGN KEY (pe_nusp)
 		REFERENCES b05_PESSOA(nusp) ON DELETE CASCADE ON UPDATE CASCADE
 
@@ -87,6 +89,7 @@ CREATE TABLE IF NOT EXISTS b10_ADMINISTRADOR (
 	pe_nusp 			int NOT NULL check (pe_nusp between 0 and 999999999),
 	email				email,
 	CONSTRAINT pk_administrador PRIMARY KEY (pe_nusp),
+	CONSTRAINT sk_administrador UNIQUE (email),
 	CONSTRAINT fk_administrador FOREIGN KEY (pe_nusp)
 		REFERENCES b05_PESSOA(nusp) ON DELETE CASCADE ON UPDATE CASCADE
 );

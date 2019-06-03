@@ -142,7 +142,6 @@ INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'e_professor');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'e_admin');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'tem_acesso');
 
-
 -- b05_PESSOA
 INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 1, us_id, 'Roberto', 'da Guia' FROM users WHERE us_email='bob@bobson.com';
 INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 2, us_id, 'Gilberto', 'Mercos' FROM users WHERE us_email='glorb@bobson.com';
