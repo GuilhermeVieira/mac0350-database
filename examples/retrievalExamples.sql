@@ -27,3 +27,5 @@ SELECT * FROM e_aluno(1);
 SELECT * FROM e_professor(1);
 
 SELECT * FROM e_admin(1);
+
+select * from tem_acesso(1, 'cria_usuario');

@@ -210,14 +210,19 @@ RETURNS BOOLEAN
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
--- Retorna True se um módulo foi concluído por determinado aluno
--- CREATE OR REPLACE FUNCTION concluiu_modulo(al_nusp INT, tri_id INT, mod_id INT)
--- RETURNS BOOLEAN
-
--- Retorna True se uma trilha foi concluída por determinado aluno
--- CREATE OR REPLACE FUNCTION concluiu_modulo(al_nusp INT, tri_id INT)
--- RETURNS BOOLEAN
-
--- Verifica se o usuário tem acesso a um serviço
--- CREATE OR REPLACE FUNCTION tem_acesso(us_id INT, nome varchar(280))
--- RETURNS BOOLEAN
+-- Verifica se um usuário tem acesso a um serviço
+CREATE OR REPLACE FUNCTION tem_acesso(us_id INT, nome varchar(280))
+RETURNS BOOLEAN
+    AS $$ 
+    DECLARE res BOOLEAN;
+    BEGIN
+        SELECT COUNT(*) INTO res
+        FROM b04_US_PF
+        INNER JOIN b01_PERFIL ON b01_PERFIL.tipo = b04_US_PF.pf_tipo
+        INNER JOIN b03_PF_SE ON b03_PF_SE.pf_tipo = b01_PERFIL.tipo
+        WHERE b04_US_PF.us_id = $1 AND b03_PF_SE.se_nome = $2;
+        RETURN res;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
