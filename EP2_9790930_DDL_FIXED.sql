@@ -100,8 +100,9 @@ CREATE TABLE IF NOT EXISTS b11_DISCIPLINA (
 	nome				varchar(100),
 	descricao			varchar(100),
 	data_fim			char(4),
+	creditos_aula		INT,
+	creditos_trabalho	INT,
 	CONSTRAINT pk_disciplina PRIMARY KEY (data_inicio, departamento, codigo)
-
 );
 
 CREATE TABLE IF NOT EXISTS b12_MODULO (
