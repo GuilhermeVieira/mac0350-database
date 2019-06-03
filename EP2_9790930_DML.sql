@@ -20,7 +20,6 @@ INSERT INTO b01_PERFIL(tipo) VALUES ('PROFESSOR');
 INSERT INTO b01_PERFIL(tipo) VALUES ('ADMIN'); 
 INSERT INTO b01_PERFIL(tipo) VALUES ('DBA'); 
 
-
 -- b02_SERVICO 
 INSERT INTO b02_SERVICO(nome) VALUES ('cria_usuario');
 INSERT INTO b02_SERVICO(nome) VALUES ('adiciona_pessoa');
@@ -119,6 +118,15 @@ INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'muda_snome');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('PROFESSOR', 'muda_sala_prof');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('PROFESSOR', 'atualiza_nota_disciplina');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('PROFESSOR', 'inicia_ministracao');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'pega_curriculos_admin');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'pega_curriculos_aluno');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'pega_oferecimentos_professor');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'pega_oferecimentos_semestre');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'pega_disciplinas_cursadas');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ALUNO', 'pega_lista_de_desejos');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'pega_trilhas_de_curriculo');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'pega_modulos_de_trilha');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'pega_disciplinas_de_modulo');
 
 
 -- b05_PESSOA
