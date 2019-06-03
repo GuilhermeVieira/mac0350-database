@@ -46,9 +46,9 @@ CREATE OR REPLACE FUNCTION vira_admin(pe_nusp INT, email email) RETURNS VOID
     SET search_path FROM CURRENT;
 
 
-CREATE OR REPLACE FUNCTION adiciona_disciplina(data_inicio CHAR(4), departamento CHAR(3), codigo CHAR(4), jupiter_link VARCHAR(100), nome VARCHAR(100), descricao VARCHAR(100), data_fim CHAR(4)) RETURNS VOID
+CREATE OR REPLACE FUNCTION adiciona_disciplina(data_inicio CHAR(4), departamento CHAR(3), codigo CHAR(4), jupiter_link VARCHAR(100), nome VARCHAR(100), descricao VARCHAR(100), data_fim CHAR(4), creditos_aula INT, creditos_trabalho INT) RETURNS VOID
     AS $$ BEGIN
-        INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ($1, $2, $3, $4, $5, $6, $7);
+        INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim, creditos_aula, creditos_trabalho) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
