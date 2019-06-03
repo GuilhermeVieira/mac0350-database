@@ -211,7 +211,7 @@ RETURNS BOOLEAN
     SET search_path FROM CURRENT;
 
 -- Verifica se um usuário tem acesso a um serviço
-CREATE OR REPLACE FUNCTION tem_acesso(us_id INT, nome varchar(280))
+CREATE OR REPLACE FUNCTION tem_acesso(us_id INT, nome VARCHAR(280))
 RETURNS BOOLEAN
     AS $$ 
     DECLARE res BOOLEAN;
