@@ -30,7 +30,6 @@ CREATE TABLE IF NOT EXISTS b01_PERFIL (
 
 CREATE TABLE IF NOT EXISTS b02_SERVICO (
 	nome         		varchar(280) NOT NULL,
-	descrição   		varchar(280),
 	CONSTRAINT pk_SERVICO PRIMARY KEY (nome)
 );
 

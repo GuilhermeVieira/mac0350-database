@@ -1,17 +1,4 @@
 
-/* 
- * POPULANDO A BASE DE DADOS
- */
--- INSERT INTO table () VALUES ();
--- INSERT INTO table () VALUES ();
--- INSERT INTO table () VALUES ();
--- INSERT INTO table () VALUES ();\
--- INSERT INTO table () VALUES ();
--- INSERT INTO table () VALUES ();
--- INSERT INTO table () VALUES ();
--- INSERT INTO table () VALUES ();
--- INSERT INTO table () VALUES ();
--- INSERT INTO table () VALUES ();
 
 -- users
 INSERT INTO users (us_email, us_password) VALUES ('bob@bobson.com', 'ashuidgfashjkgd');
@@ -26,6 +13,114 @@ INSERT INTO users (us_email, us_password) VALUES ('carlao@bobson.com', 'ashuidgf
 INSERT INTO users (us_email, us_password) VALUES ('tonho@bobson.com', 'ashuidgfashjkgd');
 
 
+-- b01_PERFIL
+INSERT INTO b01_PERFIL(tipo) VALUES ('USUARIO'); 
+INSERT INTO b01_PERFIL(tipo) VALUES ('ALUNO'); 
+INSERT INTO b01_PERFIL(tipo) VALUES ('PROFESSOR'); 
+INSERT INTO b01_PERFIL(tipo) VALUES ('ADMIN'); 
+INSERT INTO b01_PERFIL(tipo) VALUES ('DBA'); 
+
+
+-- b02_SERVICO 
+INSERT INTO b02_SERVICO(nome) VALUES ('cria_usuario');
+INSERT INTO b02_SERVICO(nome) VALUES ('adiciona_pessoa');
+INSERT INTO b02_SERVICO(nome) VALUES ('vira_professor');
+INSERT INTO b02_SERVICO(nome) VALUES ('vira_aluno');
+INSERT INTO b02_SERVICO(nome) VALUES ('vira_admin');
+INSERT INTO b02_SERVICO(nome) VALUES ('adiciona_disciplina');
+INSERT INTO b02_SERVICO(nome) VALUES ('adiciona_modulo');
+INSERT INTO b02_SERVICO(nome) VALUES ('adiciona_trilha');
+INSERT INTO b02_SERVICO(nome) VALUES ('adiciona_curriculo');
+INSERT INTO b02_SERVICO(nome) VALUES ('inicia_curso');
+INSERT INTO b02_SERVICO(nome) VALUES ('relaciona_curriculo_trilha');
+INSERT INTO b02_SERVICO(nome) VALUES ('relaciona_trilha_modulo');
+INSERT INTO b02_SERVICO(nome) VALUES ('relaciona_modulo_disciplina');
+INSERT INTO b02_SERVICO(nome) VALUES ('planeja_disciplina');
+INSERT INTO b02_SERVICO(nome) VALUES ('inicia_ministracao');
+INSERT INTO b02_SERVICO(nome) VALUES ('inicia_administracao');
+INSERT INTO b02_SERVICO(nome) VALUES ('oferece_ministracao');
+INSERT INTO b02_SERVICO(nome) VALUES ('cursa_disciplina');
+INSERT INTO b02_SERVICO(nome) VALUES ('muda_pnome');
+INSERT INTO b02_SERVICO(nome) VALUES ('muda_snome');
+INSERT INTO b02_SERVICO(nome) VALUES ('muda_satus_prof');
+INSERT INTO b02_SERVICO(nome) VALUES ('muda_sala_prof');
+INSERT INTO b02_SERVICO(nome) VALUES ('muda_status_aluno_no_curso');
+INSERT INTO b02_SERVICO(nome) VALUES ('atualiza_encerramento_administracao');
+INSERT INTO b02_SERVICO(nome) VALUES ('atualiza_nota_disciplina');
+INSERT INTO b02_SERVICO(nome) VALUES ('atualiza_status_disciplina');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_pessoa');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_professor');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_aluno');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_admin');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_disciplina');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_modulo');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_trilha');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_curriculo');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_curso');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_rel_curriculo_trilha');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_rel_trilha_modulo');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_rel_modulo_disciplina');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_planejamento');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_ministracao');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_administracao');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_ministra');
+INSERT INTO b02_SERVICO(nome) VALUES ('remove_cursa');
+INSERT INTO b02_SERVICO(nome) VALUES ('pega_curriculos_admin');
+INSERT INTO b02_SERVICO(nome) VALUES ('pega_curriculos_aluno');
+INSERT INTO b02_SERVICO(nome) VALUES ('pega_oferecimentos_professor');
+INSERT INTO b02_SERVICO(nome) VALUES ('pega_oferecimentos_semestre');
+INSERT INTO b02_SERVICO(nome) VALUES ('pega_disciplinas_cursadas');
+INSERT INTO b02_SERVICO(nome) VALUES ('pega_lista_de_desejos');
+INSERT INTO b02_SERVICO(nome) VALUES ('pega_trilhas_de_curriculo');
+INSERT INTO b02_SERVICO(nome) VALUES ('pega_modulos_de_trilha');
+INSERT INTO b02_SERVICO(nome) VALUES ('pega_disciplinas_de_modulo');
+
+-- b03_PF_SE 
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'cria_usuario');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'remove_professor');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'remove_aluno');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'remove_admin');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'remove_curriculo');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'remove_curso');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'remove_ministracao');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'remove_administracao');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'remove_cursa');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'inicia_administracao');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'adiciona_pessoa');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'vira_professor');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'vira_aluno');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'vira_admin');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'adiciona_curriculo');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'muda_satus_prof');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'remove_pessoa');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'atualiza_encerramento_administracao');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'adiciona_disciplina');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'adiciona_modulo');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'adiciona_trilha');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'inicia_curso');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'relaciona_curriculo_trilha');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'oferece_ministracao');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'cursa_disciplina');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'relaciona_trilha_modulo');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'relaciona_modulo_disciplina');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'atualiza_status_disciplina');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'remove_rel_curriculo_trilha');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'remove_rel_trilha_modulo');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'remove_rel_modulo_disciplina');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'remove_disciplina');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'remove_modulo');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'remove_trilha');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'muda_status_aluno_no_curso');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'remove_ministra');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ALUNO', 'planeja_disciplina');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ALUNO', 'remove_planejamento');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'muda_pnome');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'muda_snome');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('PROFESSOR', 'muda_sala_prof');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('PROFESSOR', 'atualiza_nota_disciplina');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('PROFESSOR', 'inicia_ministracao');
+
+
 -- b05_PESSOA
 INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 1, us_id, 'Roberto', 'da Guia' FROM users WHERE us_email='bob@bobson.com';
 INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 2, us_id, 'Gilberto', 'Mercos' FROM users WHERE us_email='glorb@bobson.com';
@@ -37,6 +132,41 @@ INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 7, us_id, 'Jose', 'Aug
 INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 8, us_id, 'Luis', 'Gomes' FROM users WHERE us_email='ze@bobson.com';
 INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 9, us_id, 'Carlos', 'Ferreira' FROM users WHERE us_email='carlao@bobson.com';
 INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) SELECT 10, us_id, 'Carlos', 'da Lua' FROM users WHERE us_email='tonho@bobson.com';
+
+
+-- b04_US_PF
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'DBA' FROM b05_PESSOA WHERE nusp=1;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=1;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=1;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=1;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=2;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=2;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=2;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=3;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=3;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=3;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=4;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=4;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=4;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=5;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=5;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=5;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=6;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=6;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=6;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=7;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=7;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=7;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=8;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=8;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=8;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=9;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=9;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=9;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=10;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=10;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=10;
+
 
 -- b07_PROFESSOR
 INSERT INTO b07_PROFESSOR (pe_nusp, status, email, sala, site) VALUES (1, 'at', 'bob@ime.usp.br', 'A214', 'ime.usp.br/~bob');
@@ -75,16 +205,16 @@ INSERT INTO b10_ADMINISTRADOR (pe_nusp, email) VALUES (9, 'cf@ime.usp.br');
 INSERT INTO b10_ADMINISTRADOR (pe_nusp, email) VALUES (10, 'mitojr@ime.usp.br');
 
 -- b11_DISCIPLINA
-INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('1987', 'MAE', '0123', 'sgldis=MAE0123', 'Introdução a bob', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '2004');
-INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('1997','MAC','0350', 'sgldis=MAC0350', 'Melhor matéria', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '2001');
-INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('2005','MAC','0121', 'sgldis=MAC0121', 'Introdução a algorimos', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', NULL);
-INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('1997','MAC','0425', 'sgldis=MAC0425', 'Robozinho', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '2003');
-INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('2018','MAT','0256', 'sgldis=MAT0256', 'Calc Pi', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', NULL);
-INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('1981','MAT','0359', 'sgldis=MAT0359', 'Logick', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '1999');
-INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('2005','MAE','0666', 'sgldis=MAE0666', 'Inferno', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', NULL);
-INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('2011','MAE','9889', 'sgldis=MAE9889', 'Amostragem de dados virtualmente obscuros', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '2014');
-INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('2016','MAC','0300', 'sgldis=MAC0300', 'Metodos Nabos', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', NULL);
-INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim) VALUES ('1993','MAC', '0460', 'sgldis=MAC0460', 'Intro a Buzzword', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', NULL);
+INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim, creditos_aula, creditos_trabalho) VALUES ('1987', 'MAE', '0123', 'sgldis=MAE0123', 'Introdução a bob', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '2004', 4, 0);
+INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim, creditos_aula, creditos_trabalho) VALUES ('1997','MAC','0350', 'sgldis=MAC0350', 'Melhor matéria', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '2001', 4, 2);
+INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim, creditos_aula, creditos_trabalho) VALUES ('2005','MAC','0121', 'sgldis=MAC0121', 'Introdução a algorimos', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', NULL, 4, 0);
+INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim, creditos_aula, creditos_trabalho) VALUES ('1997','MAC','0425', 'sgldis=MAC0425', 'Robozinho', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '2003', 4, 2);
+INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim, creditos_aula, creditos_trabalho) VALUES ('2018','MAT','0256', 'sgldis=MAT0256', 'Calc Pi', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', NULL, 4, 0);
+INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim, creditos_aula, creditos_trabalho) VALUES ('1981','MAT','0359', 'sgldis=MAT0359', 'Logick', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '1999', 4, 2);
+INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim, creditos_aula, creditos_trabalho) VALUES ('2005','MAE','0666', 'sgldis=MAE0666', 'Inferno', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', NULL, 6, 0);
+INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim, creditos_aula, creditos_trabalho) VALUES ('2011','MAE','9889', 'sgldis=MAE9889', 'Amostragem de dados virtualmente obscuros', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '2014', 4, 0);
+INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim, creditos_aula, creditos_trabalho) VALUES ('2016','MAC','0300', 'sgldis=MAC0300', 'Metodos Nabos', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', NULL, 4, 2);
+INSERT INTO b11_DISCIPLINA (data_inicio, departamento, codigo, jupiter_link, nome, descricao, data_fim, creditos_aula, creditos_trabalho) VALUES ('1993','MAC', '0460', 'sgldis=MAC0460', 'Intro a Buzzword', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', NULL, 6, 0);
 
 -- b12_MODULO
 INSERT INTO b12_MODULO (ano, nome) VALUES ('1975', 'Obrigatorias');
@@ -207,17 +337,6 @@ INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) S
 INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) SELECT 10, 9, extract(year from current_timestamp), extract(year from current_timestamp);
 INSERT INTO b21_ADMINISTRA (ad_pe_nusp, cur_codigo, inicio_gestao, fim_gestao) SELECT 2, 10, extract(year from current_timestamp), extract(year from current_timestamp);
 
--- b21_2_GESTAO
---INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP, 'A');
---INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(1), 'I');
---INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(2), 'I');
---INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(3), 'I');
---INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(4), 'I');
---INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(5), 'I');
---INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(6), 'I');
---INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(7), 'I');
---INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(8), 'I');
---INSERT INTO b21_2_GESTAO (fim_gestao, status) VALUES (CURRENT_TIMESTAMP + DAY(9), 'I');
 
 -- b22_OFERECIMENTO
 INSERT INTO b22_OFERECIMENTO (pf_pe_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES (1, '2018','MAT','0256', 1, 2018);
