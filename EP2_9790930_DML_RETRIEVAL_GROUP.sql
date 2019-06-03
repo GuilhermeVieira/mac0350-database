@@ -12,8 +12,6 @@ RETURNS TABLE (codigo INT, curso VARCHAR(100), inicio_gestao CHAR(4))
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
--- select * from pega_curriculos_admin(5);
-
 -- Pegar todos os currículos que um aluno está matriculado/já terminou
 CREATE OR REPLACE FUNCTION pega_curriculos_aluno(pe_nusp INT)
 RETURNS TABLE (codigo INT, curso VARCHAR(100), data_ingresso INT, status char(1))
@@ -28,8 +26,6 @@ RETURNS TABLE (codigo INT, curso VARCHAR(100), data_ingresso INT, status char(1)
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
--- select * from pega_curriculos_aluno(5);
-
 -- Pegar todos os oferecimentos que um professor ofereceu em determinado semestre
 CREATE OR REPLACE FUNCTION pega_oferecimentos_professor(pe_nusp INT, of_ano INT, of_semestre INT)
 RETURNS TABLE (departamento CHAR(3), codigo CHAR(4), data_inicio CHAR(4))
@@ -42,8 +38,6 @@ RETURNS TABLE (departamento CHAR(3), codigo CHAR(4), data_inicio CHAR(4))
     LANGUAGE plpgsql
     SECURITY DEFINER
     SET search_path FROM CURRENT;
-
--- select * from pega_oferecimentos_professor(1, 2018, 1)
 
 -- Pegar todas as disciplinas que foram oferecidas em determinado semestre, junto do professor que ministrou elas
 CREATE OR REPLACE FUNCTION pega_oferecimentos_semestre(of_ano INT, of_semestre INT)
@@ -60,10 +54,8 @@ RETURNS TABLE (departamento CHAR(3), codigo CHAR(4), data_inicio CHAR(4), pf_nus
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
--- select * from pega_oferecimentos_semestre(2017, 1);
-
--- Pegar todas as disciplinas que um aluno cursou em determiado semestre, junto com status e nota
-CREATE OR REPLACE FUNCTION pega_disciplinas_cursadas(al_nusp INT, of_ano INT, of_semestre INT)
+-- Pegar todas as disciplinas que um aluno cursou em determiado semestre
+CREATE OR REPLACE FUNCTION pega_disciplinas_cursadas_semestre(al_nusp INT, of_ano INT, of_semestre INT)
 RETURNS TABLE (departamento CHAR(3), codigo CHAR(4), data_inicio CHAR(4), nota REAL, status CHAR(1))
     AS $$ BEGIN
         RETURN QUERY
@@ -76,7 +68,19 @@ RETURNS TABLE (departamento CHAR(3), codigo CHAR(4), data_inicio CHAR(4), nota R
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
--- select * from pega_disciplinas_cursadas(2, 1998, 1);
+-- Pegar todas as disciplinas que um aluno cursou
+CREATE OR REPLACE FUNCTION pega_disciplinas_cursadas(al_nusp INT)
+RETURNS TABLE (departamento CHAR(3), codigo CHAR(4), data_inicio CHAR(4), ano INT, semestre INT, nota REAL, status CHAR(1))
+    AS $$ BEGIN
+        RETURN QUERY
+        SELECT dis_departamento, dis_codigo, dis_data_inicio, b22_OFERECIMENTO.ano, b22_OFERECIMENTO.semestre, b23_CURSA.nota, b23_CURSA.status
+        FROM b23_CURSA
+        INNER JOIN b22_OFERECIMENTO ON of_pf_pe_nusp = pf_pe_nusp AND of_dis_data_inicio = dis_data_inicio AND of_dis_departamento = dis_departamento AND of_dis_codigo = dis_codigo AND b23_CURSA.of_semestre = b22_OFERECIMENTO.semestre AND b23_CURSA.of_ano = b22_OFERECIMENTO.ano
+        WHERE al_pe_nusp = $1;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
 
 -- Pegar todas as disciplinas que um aluno deseja cursar, junto com o ano e o semestre planejado
 CREATE OR REPLACE FUNCTION pega_lista_de_desejos(al_nusp INT)
@@ -90,8 +94,6 @@ RETURNS TABLE (departamento CHAR(3), codigo CHAR(4), data_inicio CHAR(4), ano_pl
     LANGUAGE plpgsql
     SECURITY DEFINER
     SET search_path FROM CURRENT;
-
--- select * from pega_lista_de_desejos(10);
 
 -- Pegar todas as trilhas de um currículo
 CREATE OR REPLACE FUNCTION pega_trilhas_de_curriculo(cur_codigo INT)
@@ -107,8 +109,6 @@ RETURNS TABLE (id INT, nome VARCHAR(100), min_mods INT, min_dis INT, obrigatoria
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
--- select * pega_trilhas_de_curriculo(10);
-
 -- Pegar todas os módulos de uma trilha
 CREATE OR REPLACE FUNCTION pega_modulos_de_trilha(tri_id INT)
 RETURNS TABLE (id INT, nome VARCHAR(100), min_dis INT, min_creds INT, obrigatorio BOOLEAN)
@@ -122,8 +122,6 @@ RETURNS TABLE (id INT, nome VARCHAR(100), min_dis INT, min_creds INT, obrigatori
     LANGUAGE plpgsql
     SECURITY DEFINER
     SET search_path FROM CURRENT;
-
--- select * pega_modulos_de_trilha(10);
 
 -- Pegar todas as disciplinas de um módulo
 CREATE OR REPLACE FUNCTION pega_disciplinas_de_modulo(mod_id INT)
@@ -139,6 +137,87 @@ RETURNS TABLE (departamento CHAR(3), codigo CHAR(4), data_inicio CHAR(4), nome V
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
--- select * from pega_disciplinas_de_modulo(8);
-
 -- Pegar infos sobre uma disciplina, colocando o prefixo do jupiterweb no atributo jupiter_link
+CREATE OR REPLACE FUNCTION pega_disciplina(departamento CHAR(3), codigo CHAR(4), data_inicio CHAR(4))
+RETURNS TABLE (jupiter_link TEXT, nome varchar(100), descricao varchar(100), data_fim char(4))
+    AS $$ BEGIN
+        RETURN QUERY
+        SELECT 'https://uspdigital.usp.br/jupiterweb/obterDisciplina?' || b11_DISCIPLINA.jupiter_link, b11_DISCIPLINA.nome, b11_DISCIPLINA.descricao, b11_DISCIPLINA.data_fim
+        FROM b11_DISCIPLINA
+        WHERE b11_DISCIPLINA.departamento = $1 AND b11_DISCIPLINA.codigo = $2 AND b11_DISCIPLINA.data_inicio = $3;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
+-- Pegar todos os alunos matriculados em um currículo
+CREATE OR REPLACE FUNCTION pega_alunos_em_curriculo(codigo INT)
+RETURNS TABLE (nusp INT, pnome varchar(280), snome varchar(280), data_ingresso INT, status CHAR(1))
+    AS $$ BEGIN
+        RETURN QUERY
+        SELECT b05_PESSOA.nusp, b05_PESSOA.pnome, b05_PESSOA.snome, b15_REL_AL_CUR.data_ingresso, b15_REL_AL_CUR.status
+        FROM b15_REL_AL_CUR
+        INNER JOIN b09_ALUNO ON pe_nusp = al_pe_nusp
+        INNER JOIN b05_PESSOA ON b05_PESSOA.nusp = pe_nusp
+        WHERE cur_codigo = $1;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
+-- Pegar se uma pessoa é aluno
+CREATE OR REPLACE FUNCTION e_aluno(nusp INT)
+RETURNS BOOLEAN
+    AS $$
+    DECLARE res BOOLEAN;
+    BEGIN
+        SELECT COUNT(*) INTO res
+        FROM b09_ALUNO
+        WHERE pe_nusp = $1;
+        RETURN res;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
+-- Pegar se uma pessoa é professor
+CREATE OR REPLACE FUNCTION e_professor(nusp INT)
+RETURNS BOOLEAN
+    AS $$
+    DECLARE res BOOLEAN;
+    BEGIN
+        SELECT COUNT(*) INTO res
+        FROM b07_PROFESSOR
+        WHERE pe_nusp = $1;
+        RETURN res;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
+-- Pegar se uma pessoa é admin
+CREATE OR REPLACE FUNCTION e_admin(nusp INT)
+RETURNS BOOLEAN
+    AS $$
+    DECLARE res BOOLEAN;
+    BEGIN
+        SELECT COUNT(*) INTO res
+        FROM b10_ADMINISTRADOR
+        WHERE pe_nusp = $1;
+        RETURN res;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
+-- Retorna True se um módulo foi concluído por determinado aluno
+-- CREATE OR REPLACE FUNCTION concluiu_modulo(al_nusp INT, tri_id INT, mod_id INT)
+-- RETURNS BOOLEAN
+
+-- Retorna True se uma trilha foi concluída por determinado aluno
+-- CREATE OR REPLACE FUNCTION concluiu_modulo(al_nusp INT, tri_id INT)
+-- RETURNS BOOLEAN
+
+-- Verifica se o usuário tem acesso a um serviço
+-- CREATE OR REPLACE FUNCTION tem_acesso(us_id INT, nome varchar(280))
+-- RETURNS BOOLEAN
