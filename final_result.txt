@@ -1,0 +1,102 @@
+Grupo 09:
+Allan Amancio Rocha – NUSP 9761614
+Gabriel Kazuyuki Isomura – NUSP 9793673
+Guilherme Costa Vieira – NUSP 9790930
+João Gabriel Basi – NUSP 9793801
+Victor Chiaradia Gramuglia Araujo – NUSP 9793756
+
+Sumário de notas:
+Itens I e II (Conceitual e discussões)  4.9/5.0
+	Comentários: 10
+	Erros pequenos: 4
+	Erros graves: 0
+Item III (Lógico)                       3.0/3.0
+	Comentários: 1
+	Erros pequenos: 0
+	Erros graves: 0
+Item IV (Físico)                        1.1/2.0
+	Comentários: 1
+	Erros pequenos: 3
+	Erros graves: 3
+Bônus (DML):                            0.0/1.0
+
+Nota final: 9.1
+
+Comentários:
+Descrição: A partir dos argumentos de validação, não há justificativas de como
+se diferenciará trilhas de mesmo nome mas com conjunto de módulos/disciplinas
+diferentes, por exemplo, IA do BCC/IME e IA do BCC/ICMC. Apesar disso,
+argumentação é convincente e por isso não houve desconto. (-0.0)
+Descrição: Argumento de validação para criação de trilhas obrigatórias e
+módulos essenciais também é bem fundamentada, mas um pouco ambígua no que
+diz respeito a validação real da base. Esclarecendo melhor, da forma como
+está escrito, não fica claro se serão criados novos módulos/trilhas ou se
+o modelo usará os que já existem, incluindo o de obrigatórias. Caso seja
+da primeira forma, o modelo é consistente, da segunda não pois ter apenas
+número minimo de créditos como atributo do módulo não é suficiente, pois alguns
+módulos além do número minimo também tem suas próprias obrigatórias. De qualquer
+modo, com argumentação está relativamente bem escrita e exemplificada, não houve
+desconto. (-0.0)
+Descrição: Como Pessoa é total e NUSP é chave, futuros alunos, ingressantes
+recentes, alunos transferidos, pais preocupados, etc, podem não ter NUSP e
+sequer poderão navegar pelo sistema. Entretanto, como decisão de projeto
+foi bem apresentada, não houve desconto. (-0.0)
+Descrição: Modelagem de Disciplina e seus relacionamentos não discute como
+o modelo irá garantir a verificação de pré-requisitos. (-0.1)
+Descrição: Muito boa argumentação sobre as decisões de projeto na escolha de pk
+para disciplina. (+0.0)
+Descrição: Apresentação um pouco superficial do atributo código em
+currículo. (-0.0)
+Descrição: Apresentação de rel_dis_mod corrige a ambiguidade existente na
+validação do modelo no início do texto. (+0.0)
+Descrição: Cardinalidade de rel_dis_mod discorre sobre outras entidades que
+não as presentes na relação. (-0.1)
+Descrição: Não há problemas na solução apresentada para a criação dos módulos
+obrigatório e eletivo, mas criação do módulo livre irá requerer um cuidado
+um pouco maior, já que além da sobrecarga sobre esse módulo, cada nova
+disciplina na base que não estiver em nenhum dos módulos que não seja o livre,
+precisarão ser incluídas em todos os módulos livres de todas as trilhas e
+currículos. (-0.0)
+Descrição: Ciclo Aluno/Currículo/Módulo/Trilha/Disciplina geram violações de
+integridade não discutidas. (Ex. rel_al_cur relacionando Aluno 1 com currículo
+1 no único relacionamento desse aluno com currículo, mas Aluno 1 planejando
+disciplinas de um módulo associado a uma trilha associada ao currículo 2) (-0.1)
+Descrição: Rigor na apresentação das restrições de domínio poderiam ser
+estendidas para a descrição do atributo email. (-0.0)
+
+MER-X: Diagrama apresentado reflete com precisão o modelo conceitual
+descrito. (+0.0)
+
+Lógico: Modelo lógico não descreve como garantir recuperação precisa do nome.
+Ex.: Suponha NUSP 1 = Alberto Bernardo Carlos Dias, em pe_snome, teremos
+1, Bernardo; 1, Carlos e 1, Dias, mas não é garantia que na recuperação eles
+venham nessa ordem, o que pode levar alguém a recuperar NUSP 1 = Alberto Dias
+Bernardo Carlos, o que é uma violação de integridade. (-0.0)
+
+Texto Considerações gerais:
+Texto bem escrito, com boa introdução, motivação e fluidez. Além disso, na
+parte de descrições gerais das classes e mapeamento conceitual->lógico o
+trabalho de vocês é uma das referencias do contraste, sendo inclusive um dos
+poucos trabalhos que efetivamente fazem uma analise detalhada das decisões de
+projeto na escolha de atributos e chaves, aprofundando-se sobre o real domínio
+da aplicação. Parabéns. (+0.0)
+Entretanto, qualidade do trabalho decai no modelo físico, em alguns casos
+ignorando completamente toda a detalhada descrição dos modelos conceitual e
+lógico, em outros simplesmente escolhendo tipo/tamanho das variáveis sem
+qualquer justificativa. Não fosse esse fato, trabalho tinha tudo para ser
+referencia de contraste em todos os itens do EP1. (-0.1)
+
+Físico: Arquivo deveria ser DDL (Data description languange) e não DLL
+(Dynamic Link Library). (-0.0)
+Físico: b0_usuario.login ignora restrições da descrição. (-0.1)
+Físico: b7_email introduz restrições não tratadas no texto. (-0.1)
+Físico: b10_email introduz restrições não tratadas no texto. (-0.1)
+Físico: (Grave) Oferecimento importa fks diretamente. (-0.3)
+Físico: (2x Grave) Não apresenta script CLEAN. (-0.3)
+
+Considerações finais:
+Qualidade do trabalho decai na apresentação/argumentação sobre o modelo físico.
+Não é claro se os problemas existentes no mapeamento lógico -> físico vem
+de um mapeamento feito de forma descuidada ou de problemas de significação de
+conteúdo, de modo que talvez fosse interessante revisar esse conceito,
+principalmente nas partes de fks e contraints.
