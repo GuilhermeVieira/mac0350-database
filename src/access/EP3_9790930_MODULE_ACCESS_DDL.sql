@@ -1,0 +1,55 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+CREATE EXTENSION IF NOT EXISTS citext;
+
+-- DROP ROLE IF EXISTS dba;
+CREATE ROLE dba 
+	WITH SUPERUSER CREATEDB CREATEROLE
+	LOGIN ENCRYPTED PASSWORD 'dba1234'
+	VALID UNTIL '2020-07-01';
+
+CREATE SCHEMA IF NOT EXISTS admins;
+GRANT USAGE ON SCHEMA admins TO dba;
+
+-- DROP DOMAIN IF EXISTS email CASCADE;
+CREATE DOMAIN email AS citext
+  CHECK ( value ~ '^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$' );
+
+CREATE TABLE IF NOT EXISTS users (
+	us_id       SERIAL,
+	us_email    email,
+	us_password TEXT NOT NULL,
+	CONSTRAINT pk_user PRIMARY KEY (us_id),
+	CONSTRAINT sk_user UNIQUE (us_email)
+);
+
+CREATE TABLE IF NOT EXISTS b01_PERFIL (
+	tipo				varchar(280) NOT NULL,
+	CONSTRAINT pk_perfil PRIMARY KEY (tipo)
+
+);
+
+CREATE TABLE IF NOT EXISTS b02_SERVICO (
+	nome         		varchar(280) NOT NULL,
+	CONSTRAINT pk_SERVICO PRIMARY KEY (nome)
+);
+
+CREATE TABLE IF NOT EXISTS b03_PF_SE (
+	pf_tipo 			varchar(280) NOT NULL,
+	se_nome 			varchar(280) NOT NULL,
+	CONSTRAINT pk_pf_se PRIMARY KEY (se_nome, pf_tipo),
+	CONSTRAINT fk_pf_se1 FOREIGN KEY (se_nome)
+		REFERENCES b02_SERVICO(nome) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT fk_pf_se2 FOREIGN KEY (pf_tipo)
+		REFERENCES b01_PERFIL(tipo) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS b04_US_PF (
+	us_id 				int,
+	pf_tipo 			varchar(280),
+	CONSTRAINT pk_us_pf PRIMARY KEY (us_id, pf_tipo),
+	CONSTRAINT fk_us_pf2 FOREIGN KEY (us_id)
+		REFERENCES users(us_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT fk_us_pf3 FOREIGN KEY (pf_tipo)
+		REFERENCES b01_PERFIL(tipo) ON DELETE CASCADE ON UPDATE CASCADE
+
+);
