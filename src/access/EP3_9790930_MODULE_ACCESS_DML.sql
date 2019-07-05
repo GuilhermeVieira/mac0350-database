@@ -1,4 +1,4 @@
-- users
+-- users
 INSERT INTO users (us_email, us_password) VALUES ('bob@bobson.com', 'ashuidgfashjkgd');
 INSERT INTO users (us_email, us_password) VALUES ('glorb@bobson.com', 'ashuidgfashjkgd');
 INSERT INTO users (us_email, us_password) VALUES ('blarb@bobson.com', 'ashuidgfashjkgd');
@@ -12,13 +12,13 @@ INSERT INTO users (us_email, us_password) VALUES ('tonho@bobson.com', 'ashuidgfa
 
 
 -- b01_PERFIL
-INSERT INTO b01_PERFIL(tipo) VALUES ('USUARIO'); 
-INSERT INTO b01_PERFIL(tipo) VALUES ('ALUNO'); 
-INSERT INTO b01_PERFIL(tipo) VALUES ('PROFESSOR'); 
-INSERT INTO b01_PERFIL(tipo) VALUES ('ADMIN'); 
-INSERT INTO b01_PERFIL(tipo) VALUES ('DBA'); 
+INSERT INTO b01_PERFIL(tipo) VALUES ('USUARIO');
+INSERT INTO b01_PERFIL(tipo) VALUES ('ALUNO');
+INSERT INTO b01_PERFIL(tipo) VALUES ('PROFESSOR');
+INSERT INTO b01_PERFIL(tipo) VALUES ('ADMIN');
+INSERT INTO b01_PERFIL(tipo) VALUES ('DBA');
 
--- b02_SERVICO 
+-- b02_SERVICO
 INSERT INTO b02_SERVICO(nome) VALUES ('cria_usuario');
 INSERT INTO b02_SERVICO(nome) VALUES ('adiciona_pessoa');
 INSERT INTO b02_SERVICO(nome) VALUES ('vira_professor');
@@ -141,34 +141,34 @@ INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'e_admin');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'tem_acesso');
 
 -- b04_US_PF
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'DBA' FROM b05_PESSOA WHERE nusp=1;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=1;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=1;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=1;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=2;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=2;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=2;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=3;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=3;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=3;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=4;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=4;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=4;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=5;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=5;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=5;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=6;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=6;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=6;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=7;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=7;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=7;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=8;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=8;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=8;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=9;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=9;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=9;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM b05_PESSOA WHERE nusp=10;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM b05_PESSOA WHERE nusp=10;
-INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM b05_PESSOA WHERE nusp=10;
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'DBA' FROM users WHERE us_email='bob@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM users WHERE us_email='bob@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM users WHERE us_email='bob@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM users WHERE us_email='bob@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM users WHERE us_email='glorb@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM users WHERE us_email='glorb@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM users WHERE us_email='glorb@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM users WHERE us_email='blarb@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM users WHERE us_email='blarb@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM users WHERE us_email='blarb@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM users WHERE us_email='snake@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM users WHERE us_email='snake@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM users WHERE us_email='snake@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM users WHERE us_email='tallica@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM users WHERE us_email='tallica@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM users WHERE us_email='tallica@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM users WHERE us_email='mengao@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM users WHERE us_email='mengao@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM users WHERE us_email='mengao@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM users WHERE us_email='forbnite@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM users WHERE us_email='forbnite@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM users WHERE us_email='forbnite@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM users WHERE us_email='ze@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM users WHERE us_email='ze@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM users WHERE us_email='ze@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM users WHERE us_email='carlao@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM users WHERE us_email='carlao@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM users WHERE us_email='carlao@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM users WHERE us_email='tonho@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM users WHERE us_email='tonho@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM users WHERE us_email='tonho@bobson.com';
