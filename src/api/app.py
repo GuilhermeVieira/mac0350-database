@@ -10,19 +10,29 @@ app.config['SECRET_KEY'] = b'\xe8\x11\xbcO\xdcHw#\xcbI0c\x0f\x96\x19w'
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = 'login'
 
 accessdb = AccessModule()
 
 @login_manager.user_loader
-def load_user(user_id):
-    return accessdb.get_user(user_id)
+def load_user(us_id):
+    return accessdb.get_user_by_id(us_id)
 
 @app.route('/')
 def login():
-    user = accessdb.get_user(1)
+    return render_template('login.html')
+
+@app.route('/logmein', methods = ['POST'])
+def logmein():
+    email = request.form['email']
+    user = accessdb.get_user_by_email(email)
+
+    if not user:
+        return 'User not found'
+
     login_user(user)
-    #return render_template('login.html')
-    return 'You are logged in!'
+
+    return 'You are now logged in'
 
 @app.route('/logout')
 @login_required
