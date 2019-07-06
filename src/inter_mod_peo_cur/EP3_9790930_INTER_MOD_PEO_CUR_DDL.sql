@@ -20,6 +20,18 @@ CREATE DOMAIN email AS citext
 
 -- Adicionar: Planeja, Ministra, Administra, Cursa
 
+CREATE TABLE IF NOT EXISTS b15_REL_AL_CUR (
+	al_pe_nusp			int NOT NULL check (al_pe_nusp between 0 and 999999999),
+	cur_codigo			int NOT NULL,
+	data_ingresso		int NOT NULL check (data_ingresso >= 1827),
+	status				char(1) CHECK (status IN ('A','F','D')),
+	CONSTRAINT pk_rel_al_cur PRIMARY KEY (al_pe_nusp, cur_codigo, data_ingresso),
+	CONSTRAINT fk_rel_al_cur01 FOREIGN KEY (al_pe_nusp)
+	REFERENCES b09_ALUNO(pe_nusp) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT fk_rel_al_cur02 FOREIGN KEY (cur_codigo)
+	REFERENCES b14_CURRICULO(codigo) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS b25_REL_OFER_PROF (
   prof_nusp      int NOT NULL check (prof_nusp between 0 and 999999999),
   ofer_id        SERIAL,
