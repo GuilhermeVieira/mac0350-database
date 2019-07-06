@@ -1,4 +1,4 @@
-\c accesso;
+\c access;
 
 --------------------------------------------------------------------------------
 -- Create Group
@@ -58,6 +58,24 @@ RETURNS BOOLEAN
         INNER JOIN b03_PF_SE ON b03_PF_SE.pf_tipo = b01_PERFIL.tipo
         WHERE b04_US_PF.us_id = $1 AND b03_PF_SE.se_nome = $2;
         RETURN res;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
+-- O tipo email foi declarado no DDL
+-- Recebe um email e senha e retorna true se as credenciais estão válidas ou zero caso contrário
+CREATE OR REPLACE FUNCTION verifica_senha(user_email email, user_password TEXT)
+RETURNS BOOLEAN
+    AS $$
+    DECLARE usuario RECORD;
+    BEGIN 
+        SELECT * FROM users WHERE users.us_email = user_email INTO usuario;
+        IF (usuario.us_password = user_password) THEN
+            RETURN true;
+        ELSE
+            RETURN false;
+        END IF;
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
