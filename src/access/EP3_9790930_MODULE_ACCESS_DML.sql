@@ -12,7 +12,6 @@ INSERT INTO users (us_email, us_password) VALUES ('ze@bobson.com', 'ashuidgfashj
 INSERT INTO users (us_email, us_password) VALUES ('carlao@bobson.com', 'ashuidgfashjkgd');
 INSERT INTO users (us_email, us_password) VALUES ('tonho@bobson.com', 'ashuidgfashjkgd');
 
-
 -- b01_PERFIL
 INSERT INTO b01_PERFIL(tipo) VALUES ('USUARIO');
 INSERT INTO b01_PERFIL(tipo) VALUES ('ALUNO');
@@ -41,7 +40,7 @@ INSERT INTO b02_SERVICO(nome) VALUES ('oferece_ministracao');
 INSERT INTO b02_SERVICO(nome) VALUES ('cursa_disciplina');
 INSERT INTO b02_SERVICO(nome) VALUES ('muda_pnome');
 INSERT INTO b02_SERVICO(nome) VALUES ('muda_snome');
-INSERT INTO b02_SERVICO(nome) VALUES ('muda_satus_prof');
+INSERT INTO b02_SERVICO(nome) VALUES ('muda_status_prof');
 INSERT INTO b02_SERVICO(nome) VALUES ('muda_sala_prof');
 INSERT INTO b02_SERVICO(nome) VALUES ('muda_status_aluno_no_curso');
 INSERT INTO b02_SERVICO(nome) VALUES ('atualiza_encerramento_administracao');
