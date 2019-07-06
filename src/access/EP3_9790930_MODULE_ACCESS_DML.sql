@@ -1,3 +1,5 @@
+\c acesso;
+
 -- users
 INSERT INTO users (us_email, us_password) VALUES ('bob@bobson.com', 'ashuidgfashjkgd');
 INSERT INTO users (us_email, us_password) VALUES ('glorb@bobson.com', 'ashuidgfashjkgd');
