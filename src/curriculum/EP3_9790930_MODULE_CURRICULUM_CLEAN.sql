@@ -1,1 +1,1 @@
-\c curriculo;
+\c curriculum;

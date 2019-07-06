@@ -1,4 +1,4 @@
-\c acesso;
+\c access;
 
 DROP FUNCTION IF EXISTS cria_usuario(email, TEXT);
 DROP FUNCTION IF EXISTS tem_acesso(INT, VARCHAR(280));

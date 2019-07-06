@@ -1,3 +1,3 @@
-DROP DATABASE IF EXISTS curriculo;
-CREATE DATABASE curriculo;
-\c curriculo;
+DROP DATABASE IF EXISTS curriculum;
+CREATE DATABASE curriculum;
+\c curriculum;

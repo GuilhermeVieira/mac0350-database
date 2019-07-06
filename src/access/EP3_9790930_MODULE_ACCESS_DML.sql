@@ -1,4 +1,4 @@
-\c acesso;
+\c access;
 
 -- users
 INSERT INTO users (us_email, us_password) VALUES ('bob@bobson.com', 'ashuidgfashjkgd');

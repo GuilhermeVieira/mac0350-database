@@ -1,1 +1,1 @@
-\c pessoas;
+\c people;

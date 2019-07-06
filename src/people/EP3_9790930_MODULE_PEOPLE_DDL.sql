@@ -1,3 +1,3 @@
-DROP DATABASE IF EXISTS pessoas;
-CREATE DATABASE pessoas;
-\c pessoas;
+DROP DATABASE IF EXISTS people;
+CREATE DATABASE people;
+\c people;
