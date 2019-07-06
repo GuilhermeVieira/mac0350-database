@@ -25,14 +25,17 @@ def login():
 @app.route('/logmein', methods = ['POST'])
 def logmein():
     email = request.form['email']
+    password = request.form['password']
     user = accessdb.get_user_by_email(email)
 
     if not user:
         return 'User not found'
 
-    login_user(user)
+    if accessdb.authenticate_user(email, password):
+        login_user(user)
+        return 'You are now logged in'
 
-    return 'You are now logged in'
+    return 'Invalid credentials! Try logging in again'
 
 @app.route('/logout')
 @login_required
