@@ -100,6 +100,4 @@ CREATE TABLE IF NOT EXISTS b22_OFERECIMENTO (
 	ano					int NOT NULL check (ano >= 1827),
   CONSTRAINT pk_oferecimento PRIMARY KEY (ofer_id),
 	CONSTRAINT sk_oferecimento UNIQUE (dis_data_inicio, dis_departamento, dis_codigo, semestre, ano),
-	CONSTRAINT fk_oferecimento02 FOREIGN KEY (dis_data_inicio, dis_departamento, dis_codigo)
-	  REFERENCES b11_DISCIPLINA(data_inicio, departamento, codigo) ON DELETE CASCADE ON UPDATE CASCADE
 );
