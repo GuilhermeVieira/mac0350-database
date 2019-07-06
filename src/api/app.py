@@ -1,23 +1,17 @@
 import os
+from access_module import AccessModule
 from flask import Flask, render_template, request
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin
 
+project_name = "GradUSP"
 
-projectName = "GradUSP"
+app = Flask(project_name, template_folder = './templates')
 
-app = Flask(projectName, template_folder = '.')
-
-app.config.from_object(os.environ['APP_SETTINGS'])
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-accessdb = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-'''
-class User(UserMixin, accessdb.model):
-'''
-
+accessdb = AccessModule()
+accessdb.create_user('blackstenius@protonmail.com', 'passw0rd')
 
 @app.route('/')
 def login():
