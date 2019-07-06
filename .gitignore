@@ -1,0 +1,6 @@
+.vscode/
+ep3.code-workspace
+src/api/.vscode/
+src/api/__pycache__/
+venv/
+src/api/venv/
