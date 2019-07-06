@@ -1,4 +1,4 @@
-\c access;
+\c accesso;
 
 --------------------------------------------------------------------------------
 -- Create Group
@@ -49,7 +49,7 @@ CREATE OR REPLACE FUNCTION muda_email(nusp INT, pnome VARCHAR(280)) RETURNS VOID
 -- Verifica se um usuário tem acesso a um serviço
 CREATE OR REPLACE FUNCTION tem_acesso(us_id INT, nome VARCHAR(280))
 RETURNS BOOLEAN
-    AS $$ 
+    AS $$
     DECLARE res BOOLEAN;
     BEGIN
         SELECT COUNT(*) INTO res
@@ -62,6 +62,3 @@ RETURNS BOOLEAN
     LANGUAGE plpgsql
     SECURITY DEFINER
     SET search_path FROM CURRENT;
-
-
-

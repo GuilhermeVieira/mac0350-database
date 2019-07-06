@@ -1,0 +1,19 @@
+DROP DATABASE IF EXISTS acc_peo;
+CREATE DATABASE acc_peo;
+\c acc_peo;
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+CREATE EXTENSION IF NOT EXISTS citext;
+
+-- DROP ROLE IF EXISTS dba;
+CREATE ROLE dba
+  WITH SUPERUSER CREATEDB CREATEROLE
+  LOGIN ENCRYPTED PASSWORD 'dba1234'
+  VALID UNTIL '2020-07-01';
+
+CREATE SCHEMA IF NOT EXISTS admins;
+GRANT USAGE ON SCHEMA admins TO dba;
+
+-- DROP DOMAIN IF EXISTS email CASCADE;
+CREATE DOMAIN email AS citext
+  CHECK ( value ~ '^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$' );

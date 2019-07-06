@@ -4,9 +4,9 @@
 -- Create Group
 --------------------------------------------------------------------------------
 
-CREATE OR REPLACE FUNCTION adiciona_pessoa(nusp INT, us_login INT, pnome VARCHAR(280), snome VARCHAR(280)) RETURNS VOID
+CREATE OR REPLACE FUNCTION adiciona_pessoa(nusp INT, pnome VARCHAR(280), snome VARCHAR(280)) RETURNS VOID
     AS $$ BEGIN
-        INSERT INTO b05_PESSOA (nusp, us_id, pnome, snome) VALUES ($1, $2, $3, $4);
+        INSERT INTO b05_PESSOA (nusp, pnome, snome) VALUES ($1, $2, $3);
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
