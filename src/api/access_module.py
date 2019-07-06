@@ -20,6 +20,13 @@ class AccessModule:
         except Exception as e:
             return str(e)
 
+    def authenticate_user(self, email, password):
+        try:
+            return self.session.execute(func.verifica_senha(email, password)).first()[0]
+        except Exception as e:
+            print('Erro' + e)
+            return False 
+
     def get_user_by_id(self, us_id):
         return self.session.query(User).get(us_id)
 
