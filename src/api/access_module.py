@@ -20,8 +20,11 @@ class AccessModule:
         except Exception as e:
             return str(e)
 
-    def get_user(self, user_id):
-        return self.session.query(User).get(int(user_id))
+    def get_user_by_id(self, us_id):
+        return self.session.query(User).get(us_id)
+
+    def get_user_by_email(self, us_email):
+        return self.session.query(User).filter_by(us_email=str(us_email)).first()
 
 class User(UserMixin, AccessModule.Base):
     __tablename__ = 'users'
