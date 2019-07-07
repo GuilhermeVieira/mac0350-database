@@ -26,7 +26,7 @@ def login():
         if user:
             if accessdb.authenticate_user(form.email.data, form.password.data):
                 login_user(user, remember = form.remember.data)
-                return redirect(url_for('home'))
+                return redirect(url_for('home', profile_id = user.us_id))
         return '<h1>Invalid username or password</h1>'
 
     return render_template('login.html', form = form)
@@ -37,7 +37,9 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-@app.route('/home')
+@app.route('/home/<profile_id>')
 @login_required
-def home():
+def home(profile_id):
+    if current_user.us_id != int(profile_id):
+        return 'Unauthorized: You do not have the right credentials to access this page!'
     return 'The current user is ' + current_user.us_email
