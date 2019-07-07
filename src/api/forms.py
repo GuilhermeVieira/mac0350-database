@@ -3,6 +3,6 @@ from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Email, Length
 
 class LoginForm(FlaskForm):
-    email = StringField('email', validators=[InputRequired(), Length(min=4, max=32)])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
-    remember = BooleanField('remember me')
+    email = StringField('E-mail', validators=[InputRequired(), Length(min=4, max=32)])
+    password = PasswordField('Senha', validators=[InputRequired(), Length(min=8, max=80)])
+    remember = BooleanField('Lembrar')

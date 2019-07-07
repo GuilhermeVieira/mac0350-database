@@ -27,7 +27,7 @@ def login():
             if accessdb.authenticate_user(form.email.data, form.password.data):
                 login_user(user, remember = form.remember.data)
                 return redirect(url_for('home', profile_id = user.us_id))
-        return '<h1>Invalid username or password</h1>'
+        return '<h1>Email ou senha inválidos.</h1>'
 
     return render_template('login.html', form = form)
 
@@ -46,4 +46,4 @@ def home(profile_id):
     nusp = acc_peodb.get_user_nusp(current_user.us_email)
     if not nusp:
         return 'Usuário ainda não vinculado com número USP'
-    return 'The current user name is ' + peopledb.get_name(nusp)
+    return render_template('dashboard.html', name = peopledb.get_name(nusp))
