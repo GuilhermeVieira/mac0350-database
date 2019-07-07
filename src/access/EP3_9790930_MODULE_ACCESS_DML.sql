@@ -96,7 +96,7 @@ INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'vira_professor');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'vira_aluno');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'vira_admin');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'adiciona_curriculo');
-INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'muda_satus_prof');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'muda_status_prof');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'remove_pessoa');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('DBA', 'atualiza_encerramento_administracao');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('ADMIN', 'adiciona_disciplina');

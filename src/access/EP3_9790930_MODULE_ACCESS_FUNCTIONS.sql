@@ -69,7 +69,7 @@ CREATE OR REPLACE FUNCTION verifica_senha(user_email email, user_password TEXT)
 RETURNS BOOLEAN
     AS $$
     DECLARE usuario RECORD;
-    BEGIN 
+    BEGIN
         SELECT * FROM users WHERE users.us_email = user_email INTO usuario;
         IF (usuario.us_password = user_password) THEN
             RETURN true;

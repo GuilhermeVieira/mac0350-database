@@ -85,13 +85,13 @@ INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_c
 INSERT INTO b18_REL_DIS_MOD (mo_mod_id, dis_data_inicio, dis_departamento, dis_codigo, obrigatorio) SELECT mod_id, '1993', 'MAC', '0460', TRUE FROM b12_MODULO WHERE nome = 'Data Science' LIMIT 1;
 
 -- b22_OFERECIMENTO
-INSERT INTO b22_OFERECIMENTO (dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES ('2018','MAT','0256', 1, 2018);
-INSERT INTO b22_OFERECIMENTO (dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES ('1981', 'MAT', '0359', 2, 2000);
-INSERT INTO b22_OFERECIMENTO (dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES ('1987', 'MAE', '0123', 1, 1999);
-INSERT INTO b22_OFERECIMENTO (dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES ('2011', 'MAE', '9889', 2, 2012);
-INSERT INTO b22_OFERECIMENTO (dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES ('2016', 'MAC', '0300', 1, 2017);
-INSERT INTO b22_OFERECIMENTO (dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES ('2005', 'MAE', '0666', 1, 2006);
-INSERT INTO b22_OFERECIMENTO (dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES ('1997', 'MAC', '0350', 2, 1998);
-INSERT INTO b22_OFERECIMENTO (dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES ('1997','MAC','0425', 1, 1998);
-INSERT INTO b22_OFERECIMENTO (dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES ('2005','MAC','0121', 2, 2007);
-INSERT INTO b22_OFERECIMENTO (dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES ('1997','MAC','0425', 1, 2001);
+INSERT INTO b22_OFERECIMENTO (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES (1, '2018','MAT','0256', 1, 2018);
+INSERT INTO b22_OFERECIMENTO (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES (1, '1981', 'MAT', '0359', 2, 2000);
+INSERT INTO b22_OFERECIMENTO (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES (3, '1987', 'MAE', '0123', 1, 1999);
+INSERT INTO b22_OFERECIMENTO (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES (3, '2011', 'MAE', '9889', 2, 2012);
+INSERT INTO b22_OFERECIMENTO (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES (4, '2016', 'MAC', '0300', 1, 2017);
+INSERT INTO b22_OFERECIMENTO (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES (5, '2005', 'MAE', '0666', 1, 2006);
+INSERT INTO b22_OFERECIMENTO (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES (6, '1997', 'MAC', '0350', 2, 1998);
+INSERT INTO b22_OFERECIMENTO (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES (7, '1997','MAC','0425', 1, 1998);
+INSERT INTO b22_OFERECIMENTO (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES (9, '2005','MAC','0121', 2, 2007);
+INSERT INTO b22_OFERECIMENTO (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES (10, '1997','MAC','0425', 1, 2001);

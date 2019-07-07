@@ -100,5 +100,5 @@ CREATE TABLE IF NOT EXISTS b22_OFERECIMENTO (
 	semestre			int NOT NULL check (semestre between 1 and 2),
 	ano					int NOT NULL check (ano >= 1827),
   CONSTRAINT pk_oferecimento PRIMARY KEY (ofer_id),
-	CONSTRAINT sk_oferecimento UNIQUE (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano),
+	CONSTRAINT sk_oferecimento UNIQUE (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano)
 );
