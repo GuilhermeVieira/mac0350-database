@@ -46,7 +46,7 @@ def home(profile_id):
     nusp = acc_peodb.get_user_nusp(current_user.us_email)
     if not nusp:
         return 'Usuário ainda não vinculado com número USP'
-    return render_template('dashboard.html', name = peopledb.get_name(nusp))
+    return render_template('dashboard.html', name = peopledb.get_name(nusp), CONTENT = {})
 
 @app.route('/home/<profile_id>/usuario')
 @login_required
@@ -81,4 +81,20 @@ def administrador(profile_id):
 def dba(profile_id):
     if current_user.us_id != int(profile_id):
         return 'Unauthorized: You do not have the right credentials to access this page!'
-    return 'DBA page'
+
+    CONTENT = {
+        "Services": [
+            ["Cria usuário", "create_user"]
+        ]
+    }
+    return render_template('dashboard.html', name = peopledb.get_name(acc_peodb.get_user_nusp(current_user.us_email)), CONTENT = CONTENT)
+
+# DBA Services
+@app.route('/home/<profile_id>/criausuario')
+@login_required
+def create_user(profile_id):
+    if current_user.us_id != int(profile_id):
+        return 'Unauthorized: You do not have the right credentials to access this page!'
+
+    return 'DBA cria usuário'
+
