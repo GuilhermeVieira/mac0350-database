@@ -96,5 +96,8 @@ def create_user(profile_id):
     if current_user.us_id != int(profile_id):
         return 'Unauthorized: You do not have the right credentials to access this page!'
 
+    if not accessdb.is_allowed(current_user.us_id, 'cria_usuario'):
+        return 'Unauthorized: You do not have the right credentials to access this page!'
+
     return 'DBA cria usuário'
 

@@ -33,11 +33,16 @@ class AccessModule:
     def get_user_by_email(self, us_email):
         return self.session.query(User).filter_by(us_email=str(us_email)).first()
 
+    def is_allowed(self, us_id, service):
+        try:
+            return self.session.execute(func.tem_acesso(us_id, 'cria_usuario')).first()[0]
+        except Exception as e:
+            print('Error: ' + str(e))
+            return False
+
 class User(UserMixin, AccessModule.Base):
     __tablename__ = 'users'
     __table_args__ = { 'autoload': True }
 
     def get_id(self):
         return self.us_id
-
-
