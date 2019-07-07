@@ -1,0 +1,20 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Aluno - Disciplinas em planejamento
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='signin.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <h1>Disciplinas em planejamento</h1>
+  {{ disc_desejadas }}
+
+</div> <!-- /container -->
+{% endblock %}

@@ -9,7 +9,7 @@ class CurriculumModule:
 
     def verifica_disciplina_existe(self, data_ini, dpto, cod):
         try:
-            return self.session.execute(func.verifica_disciplina_existe(data_ini, dpto, cod)).first()[0]
+            return self.session.execute(func.verifica_disciplina_existe(data_ini, dpto, cod))
         except Exception as e:
             print('Erro: ' + str(e))
             return None

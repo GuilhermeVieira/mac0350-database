@@ -24,3 +24,10 @@ class PeoCurModule:
         except Exception as e:
             print(str(e))
             return None
+
+    def pega_lista_de_desejos(self, al_nusp):
+        try:
+            return self.session.execute(func.pega_lista_de_desejos(al_nusp))
+        except Exception as e:
+            print(str(e))
+            return None

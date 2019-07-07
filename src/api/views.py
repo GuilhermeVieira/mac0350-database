@@ -134,7 +134,10 @@ def pega_lista_de_desejos(profile_id):
     if not accessdb.is_allowed(current_user.us_id, 'pega_lista_de_desejos'):
         return 'Unauthorized: You do not have the right credentials to access this page!'
 
-    return render_template('planeja_disciplina.html')
+    nusp = acc_peodb.get_user_nusp(current_user.us_email)
+    disc_desejadas = peo_curdb.pega_lista_de_desejos(nusp)
+
+    return render_template('pega_lista_de_desejos.html', disc_desejadas = disc_desejadas)
 
 # DBA Services
 @app.route('/home/<profile_id>/cria_usuario', methods=['GET', 'POST'])
