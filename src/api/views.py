@@ -114,13 +114,19 @@ def planeja_disciplina(profile_id):
         return '<h1>Erro.</h1>'
     return render_template('planeja_disciplina.html', form = form)
 
-@app.route('/home/<profile_id>/remove_planejamento')
+@app.route('/home/<profile_id>/remove_planejamento', methods=['GET', 'POST'])
 @login_required
 def remove_planejamento(profile_id):
     if not accessdb.is_allowed(current_user.us_id, 'remove_planejamento'):
         return 'Unauthorized: You do not have the right credentials to access this page!'
 
-    return render_template('remove_planejamento.html')
+    form = forms.RemovePlanejamentoForm()
+    if form.validate_on_submit():
+        nusp = acc_peodb.get_user_nusp(current_user.us_email)
+        if peo_curdb.remove_planejamento(nusp, form.data_inicio.data, form.departamento.data, form.codigo.data):
+            return redirect(url_for('remove_planejamento', profile_id = current_user.us_id))
+        return '<h1>Erro.</h1>'
+    return render_template('remove_planejamento.html', form = form)
 
 @app.route('/home/<profile_id>/pega_lista_de_desejos')
 @login_required

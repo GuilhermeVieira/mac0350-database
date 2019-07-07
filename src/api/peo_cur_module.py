@@ -15,3 +15,12 @@ class PeoCurModule:
         except Exception as e:
             print(str(e))
             return None
+
+    def remove_planejamento(self, al_nusp, data_ini, departamento, codigo):
+        try:
+            self.session.execute(func.remove_planejamento(al_nusp, data_ini, departamento, codigo))
+            self.session.commit()
+            return True
+        except Exception as e:
+            print(str(e))
+            return None
