@@ -116,6 +116,23 @@ CREATE OR REPLACE FUNCTION remove_admin(pe_nusp INT) RETURNS VOID
 -- Retrieval Group
 --------------------------------------------------------------------------------
 
+CREATE OR REPLACE FUNCTION recupera_nome(numerousp INT)
+RETURNS TEXT
+    AS $$
+    DECLARE res TEXT;
+    DECLARE pn TEXT;
+    DECLARE sn TEXT;
+    BEGIN
+        SELECT pnome FROM b05_pessoa WHERE nusp = $1 INTO pn;
+        SELECT snome FROM b05_pessoa WHERE nusp = $1 INTO sn;
+        SELECT CONCAT(pn, ' ', sn) INTO res
+        ;
+        RETURN res;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
 CREATE OR REPLACE FUNCTION e_aluno(nusp INT)
 RETURNS BOOLEAN
     AS $$

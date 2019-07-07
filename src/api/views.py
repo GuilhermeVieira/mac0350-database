@@ -1,4 +1,4 @@
-from app import app, accessdb, acc_peodb
+from app import app, accessdb, acc_peodb, peopledb
 from forms import LoginForm
 from flask_bootstrap import Bootstrap
 from flask import render_template, redirect, url_for
@@ -46,4 +46,4 @@ def home(profile_id):
     nusp = acc_peodb.get_user_nusp(current_user.us_email)
     if not nusp:
         return 'Usuário ainda não vinculado com número USP'
-    return 'The current user NUSP is ' + str(nusp)
+    return 'The current user name is ' + peopledb.get_name(nusp)

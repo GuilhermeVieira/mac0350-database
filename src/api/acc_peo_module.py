@@ -5,10 +5,6 @@ class AccPeoModule:
     session, Base = load_session(databases.urls['DATABASE_ACC_PEO_URL'])
     
     def __init__(self):
-        '''
-        for item in self.session.query(User.us_id):
-            print(item.first())
-        '''
         return
 
     def get_user_nusp(self, email):
