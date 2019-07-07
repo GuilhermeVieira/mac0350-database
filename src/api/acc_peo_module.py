@@ -11,5 +11,5 @@ class AccPeoModule:
         try:
             return self.session.execute(func.recupera_nusp_rel_us_pe(email)).first()[0]
         except Exception as e:
-            print('Erro: ' + e)
-            return False
+            print('Error: ' + str(e))
+            return None

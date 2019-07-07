@@ -109,7 +109,7 @@ def dba(profile_id):
 @app.route('/home/<profile_id>/cria_usuario', methods=['GET', 'POST'])
 @login_required
 def cria_usuario(profile_id):
-    if current_user.us_id != int(profile_id):
+    if not accessdb.is_allowed(current_user.us_id, 'cria_usuario'):
         return 'Unauthorized: You do not have the right credentials to access this page!'
 
     form = CriaUsuarioForm()
@@ -118,4 +118,3 @@ def cria_usuario(profile_id):
             return redirect(url_for('cria_usuario', profile_id = current_user.us_id))
         return '<h1>Email ou senha inválidos.</h1>'
     return render_template('cria_usuario.html', form = form)
-
