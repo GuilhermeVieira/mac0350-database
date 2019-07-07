@@ -9,9 +9,9 @@ class PeoCurModule:
 
     def planeja_disciplina(self, al_nusp, data_ini, departamento, codigo, ano, semestre):
         try:
-            self.session.execute(func.planeja_disciplina(al_nusp, data_ini, departamentp, codigo, ano, semestre))
+            self.session.execute(func.planeja_disciplina(al_nusp, data_ini, departamento, codigo, ano, semestre))
             self.session.commit()
             return True
         except Exception as e:
-            return str(e)
+            print(str(e))
             return None
