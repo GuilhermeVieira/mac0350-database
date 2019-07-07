@@ -93,13 +93,12 @@ CREATE TABLE IF NOT EXISTS b18_REL_DIS_MOD (
 
 CREATE TABLE IF NOT EXISTS b22_OFERECIMENTO (
   ofer_id           SERIAL,
+  pf_nusp           int NOT NULL check(pf_nusp between 0 and 999999999),
 	dis_data_inicio		char(4) NOT NULL,
 	dis_departamento	char(3) NOT NULL,
 	dis_codigo			char(4) NOT NULL,
 	semestre			int NOT NULL check (semestre between 1 and 2),
 	ano					int NOT NULL check (ano >= 1827),
   CONSTRAINT pk_oferecimento PRIMARY KEY (ofer_id),
-	CONSTRAINT sk_oferecimento UNIQUE (dis_data_inicio, dis_departamento, dis_codigo, semestre, ano),
-	CONSTRAINT fk_oferecimento02 FOREIGN KEY (dis_data_inicio, dis_departamento, dis_codigo)
-	  REFERENCES b11_DISCIPLINA(data_inicio, departamento, codigo) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT sk_oferecimento UNIQUE (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano),
 );

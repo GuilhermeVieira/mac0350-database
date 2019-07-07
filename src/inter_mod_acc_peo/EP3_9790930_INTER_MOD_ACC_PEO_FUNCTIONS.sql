@@ -54,3 +54,12 @@ CREATE OR REPLACE FUNCTION verifica_email_existe (IN us_email email)
   LANGUAGE sql
   SECURITY DEFINER
   SET search_path FROM CURRENT;
+
+CREATE OR REPLACE FUNCTION recupera_nusp_rel_us_pe (IN us_email email, OUT pe_nusp int)
+  RETURNS int AS
+  $$
+  SELECT pe_nusp FROM b24_REL_US_PE WHERE us_email = $1
+  $$
+  LANGUAGE sql
+  SECURITY DEFINER
+  SET search_path FROM CURRENT;

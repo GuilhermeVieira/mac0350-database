@@ -60,9 +60,9 @@ CREATE OR REPLACE FUNCTION relaciona_modulo_disciplina(mo_mod_id INT, dis_data_i
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
-CREATE OR REPLACE FUNCTION oferece_ministracao(dis_data_inicio CHAR(4), dis_departamento CHAR(3), dis_codigo CHAR(4), semestre INT, ano INT) RETURNS VOID
+CREATE OR REPLACE FUNCTION oferece_ministracao(prof_nusp int, dis_data_inicio CHAR(4), dis_departamento CHAR(3), dis_codigo CHAR(4), semestre INT, ano INT) RETURNS VOID
     AS $$ BEGIN
-        INSERT INTO b22_OFERECIMENTO (dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES ($1, $2, $3, $4, $5);
+        INSERT INTO b22_OFERECIMENTO (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) VALUES ($1, $2, $3, $4, $5, $6);
     END; $$
     LANGUAGE plpgsql
     SECURITY DEFINER
@@ -134,6 +134,14 @@ CREATE OR REPLACE FUNCTION remove_rel_modulo_disciplina(mo_mod_id INT, dis_data_
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
+CREATE OR REPLACE FUNCTION remove_ministra(pe_nusp INT, dis_data_inicio CHAR(4), dis_departamento CHAR(3), dis_codigo CHAR(4), semestre INT, ano INT) RETURNS VOID
+    AS $$ BEGIN
+        DELETE FROM b22_OFERECIMENTO WHERE pf_nusp=$1 AND b22_OFERECIMENTO.dis_data_inicio=$2 AND b22_OFERECIMENTO.dis_departamento=$3 AND b22_OFERECIMENTO.dis_codigo=$4 AND b22_OFERECIMENTO.semestre=$5 AND b22_OFERECIMENTO.ano=$6;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
 --------------------------------------------------------------------------------
 -- Retrieval Group
 --------------------------------------------------------------------------------
@@ -188,3 +196,12 @@ AS $$ BEGIN
 LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path FROM CURRENT;
+
+CREATE OR REPLACE FUNCTION pega_ofer_id(IN prof_nusp int, IN data_ini char(4), IN departamento char(3), IN codigo char(4), IN semestre int, IN ano int,  OUT ofer_id int)
+  RETURNS int AS
+  $$
+  SELECT ofer_id FROM b22_OFERECIMENTO WHERE (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) = ($1, $2, $3, $4, $5, $6)
+  $$
+  LANGUAGE sql
+  SECURITY DEFINER
+  SET search_path FROM CURRENT;

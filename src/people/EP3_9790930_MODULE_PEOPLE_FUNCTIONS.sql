@@ -115,3 +115,45 @@ CREATE OR REPLACE FUNCTION remove_admin(pe_nusp INT) RETURNS VOID
 --------------------------------------------------------------------------------
 -- Retrieval Group
 --------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION e_aluno(nusp INT)
+RETURNS BOOLEAN
+    AS $$
+    DECLARE res BOOLEAN;
+    BEGIN
+        SELECT COUNT(*) INTO res
+        FROM b09_ALUNO
+        WHERE pe_nusp = $1;
+        RETURN res;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
+CREATE OR REPLACE FUNCTION e_professor(nusp INT)
+RETURNS BOOLEAN
+    AS $$
+    DECLARE res BOOLEAN;
+    BEGIN
+        SELECT COUNT(*) INTO res
+        FROM b07_PROFESSOR
+        WHERE pe_nusp = $1;
+        RETURN res;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
+CREATE OR REPLACE FUNCTION e_admin(nusp INT)
+RETURNS BOOLEAN
+    AS $$
+    DECLARE res BOOLEAN;
+    BEGIN
+        SELECT COUNT(*) INTO res
+        FROM b10_ADMINISTRADOR
+        WHERE pe_nusp = $1;
+        RETURN res;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
