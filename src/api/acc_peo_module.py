@@ -1,9 +1,9 @@
 import databases
 from database_handler import load_session, func
 
-class AccPeoModule: 
+class AccPeoModule:
     session, Base = load_session(databases.urls['DATABASE_ACC_PEO_URL'])
-    
+
     def __init__(self):
         return
 

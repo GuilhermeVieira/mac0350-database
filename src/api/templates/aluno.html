@@ -1,0 +1,18 @@
+{% block title %}
+<h1>Perfil - Aluno</h1>
+{% endblock %}
+
+{% block content %}
+<h1>Serviços</h1>
+
+<h3><table><form action="" method="POST">
+  <td>
+    <label>Selecione um serviço :</label>
+    <select name="servico_escolhido" width="300px">
+      {% for s in services %}
+      <option value="{{ s }}"{% if loop.first %} SELECTED{% endif %}>{{ s }}</option>
+      {% endfor %}
+    </select>
+  </td>
+</form></table></h3>
+{% endblock %}
