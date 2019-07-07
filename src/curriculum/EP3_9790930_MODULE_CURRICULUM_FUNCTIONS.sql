@@ -198,10 +198,31 @@ SECURITY DEFINER
 SET search_path FROM CURRENT;
 
 CREATE OR REPLACE FUNCTION pega_ofer_id(IN prof_nusp int, IN data_ini char(4), IN departamento char(3), IN codigo char(4), IN semestre int, IN ano int,  OUT ofer_id int)
-  RETURNS int AS
-  $$
-  SELECT ofer_id FROM b22_OFERECIMENTO WHERE (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) = ($1, $2, $3, $4, $5, $6)
-  $$
-  LANGUAGE sql
-  SECURITY DEFINER
-  SET search_path FROM CURRENT;
+    RETURNS int AS
+    $$
+        SELECT ofer_id FROM b22_OFERECIMENTO WHERE (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) = ($1, $2, $3, $4, $5, $6)
+    $$
+    LANGUAGE sql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
+CREATE OR REPLACE FUNCTION pega_ofer_info(IN ofer_id INT, OUT pf_nusp INT, OUT data_ini CHAR(4), OUT departamento CHAR(3), OUT codigo CHAR(4), OUT semestre INT, OUT ano INT, OUT ofer_id INT)
+    RETURNS SETOF RECORD AS
+    $$
+    SELECT (pf_nusp, dis_data_inicio, dis_departamento, dis_codigo, semestre, ano) FROM b22_OFERECIMENTO WHERE ofer_id = $1
+    $$
+    LANGUAGE sql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
+CREATE OR REPLACE FUNCTION pega_oferecimentos_semestre(of_ano INT, of_semestre INT)
+    RETURNS TABLE (of_id INT, departamento CHAR(3), codigo CHAR(4), data_inicio CHAR(4), pf_nusp INT)
+    AS $$ BEGIN
+        RETURN QUERY
+        SELECT ofer_id, dis_departamento, dis_codigo, dis_data_inicio, pf_nusp
+        FROM b22_OFERECIMENTO
+        WHERE ano = $1 AND semestre = $2;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;

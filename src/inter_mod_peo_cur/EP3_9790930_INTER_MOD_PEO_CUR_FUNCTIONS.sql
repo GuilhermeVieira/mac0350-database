@@ -54,10 +54,11 @@ CREATE OR REPLACE FUNCTION cursa_disciplina(al_nusp INT, ofer_id INT, nota REAL,
     SECURITY DEFINER
     SET search_path FROM CURRENT;
 
-CREATE OR REPLACE FUNCTION relaciona_ofer_prof(INOUT prof_nusp int, INOUT ofer_id SERIAL)
+CREATE OR REPLACE FUNCTION relaciona_ofer_prof(INOUT prof_nusp int, INOUT ofer_id int)
     RETURNS SETOF RECORD AS
     $$
-        INSERT INTO b25_REL_OFER_PROF(prof_nusp, ofer_id) VALUES ($1, $2)
+      INSERT INTO b25_REL_OFER_PROF(prof_nusp, ofer_id) VALUES ($1, $2)
+      RETURNING (prof_nusp, ofer_id)
     $$
     LANGUAGE sql
     SECURITY DEFINER
@@ -154,3 +155,65 @@ CREATE OR REPLACE FUNCTION remove_rel_ofer_prof(IN nusp INT, IN of_id INT) RETUR
 --------------------------------------------------------------------------------
 -- Retrieval Group
 --------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION pega_curriculos_admin(pe_nusp INT)
+RETURNS TABLE (_codigo INT, _inicio_gestao CHAR(4), _fim_gestao CHAR(4))
+    AS $$ BEGIN
+        RETURN QUERY
+        SELECT (cur_codigo, inicio_gestao, fim_gestao) FROM b21_ADMINISTRA WHERE ad_pe_nusp = $1;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
+CREATE OR REPLACE FUNCTION pega_curriculos_aluno(pe_nusp INT)
+RETURNS TABLE (_cur_codigo INT, _data_ingresso INT, _status char(1))
+    AS $$ BEGIN
+        RETURN QUERY
+        SELECT (cur_codigo, data_ingresso, status) FROM b15_REL_AL_CUR WHERE al_pe_nusp = $1;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
+CREATE OR REPLACE FUNCTION pega_ofers_ids_professor(pe_nusp INT)
+RETURNS TABLE (_ofer_id INT)
+    AS $$ BEGIN
+        RETURN QUERY
+        SELECT ofer_id FROM b25_REL_OFER_PROF WHERE prof_nusp = $1;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
+CREATE OR REPLACE FUNCTION pega_disciplinas_cursadas(al_nusp INT)
+RETURNS TABLE (of_id INT, nota REAL, status CHAR(1))
+    AS $$ BEGIN
+        RETURN QUERY
+        SELECT b23_CURSA.of_id, b23_CURSA.nota, b23_CURSA.status FROM b23_CURSA WHERE al_pe_nusp = $1;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
+CREATE OR REPLACE FUNCTION pega_lista_de_desejos(al_nusp INT)
+RETURNS TABLE (departamento CHAR(3), codigo CHAR(4), data_inicio CHAR(4), ano_planejado CHAR(4), semestre_planejado INT)
+    AS $$ BEGIN
+        RETURN QUERY
+        SELECT dis_departamento, dis_codigo, dis_data_inicio, ano, semestre
+        FROM b19_PLANEJA
+        WHERE al_pe_nusp = $1;
+    END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+
+CREATE OR REPLACE FUNCTION pega_alunos_em_curriculo(codigo INT)
+RETURNS TABLE (nusp INT, data_ingresso INT, status CHAR(1))
+    AS $$ BEGIN
+        RETURN QUERY
+        SELECT (al_pe_nusp, data_ingresso, status) FROM b15_REL_AL_CUR WHERE cur_codigo = $1;
+        END; $$
+    LANGUAGE plpgsql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;

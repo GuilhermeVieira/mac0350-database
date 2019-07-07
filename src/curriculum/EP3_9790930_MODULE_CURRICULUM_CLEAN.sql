@@ -21,6 +21,8 @@ DROP FUNCTION IF EXISTS pega_modulos_de_trilha(INT);
 DROP FUNCTION IF EXISTS pega_disciplinas_de_modulo(INT);
 DROP FUNCTION IF EXISTS pega_disciplina(CHAR(3), CHAR(4), CHAR(4));
 DROP FUNCTION IF EXISTS pega_ofer_id(CHAR(4), CHAR(3), CHAR(4), INT, INT, INT);
+DROP FUNCTION IF EXISTS pega_ofer_info(INT, INT, CHAR(4), CHAR(3), CHAR(4), INT, INT, INT);
+DROP FUNCTION IF EXISTS pega_oferecimentos_semestre(INT, INT);
 
 DROP TABLE b22_oferecimento;
 DROP TABLE b18_rel_dis_mod;
