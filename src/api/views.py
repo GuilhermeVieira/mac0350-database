@@ -106,6 +106,8 @@ def planeja_disciplina(profile_id):
 
     form = forms.PlanejaDisciplinaForm()
     if form.validate_on_submit():
+        if not curriculumdb.verifica_disciplina_existe(form.data_inicio.data, form.departamento.data, form.codigo.data):
+            return '<h1>Disciplina não existe no banco de dados.</h1>'
         nusp = acc_peodb.get_user_nusp(current_user.us_email)
         if peo_curdb.planeja_disciplina(nusp, form.data_inicio.data, form.departamento.data, form.codigo.data, form.ano.data, form.semestre.data):
             return redirect(url_for('planeja_disciplina', profile_id = current_user.us_id))

@@ -226,3 +226,13 @@ CREATE OR REPLACE FUNCTION pega_oferecimentos_semestre(of_ano INT, of_semestre I
     LANGUAGE plpgsql
     SECURITY DEFINER
     SET search_path FROM CURRENT;
+
+CREATE OR REPLACE FUNCTION verifica_disciplina_existe(IN data_ini CHAR(4), IN dpto CHAR(3), IN cod CHAR(4))
+    RETURNS boolean AS
+    $$
+        SELECT EXISTS(SELECT * FROM b11_DISCIPLINA WHERE (data_inicio, departamento, codigo) = ($1, $2, $3))
+    $$
+    LANGUAGE sql
+    SECURITY DEFINER
+    SET search_path FROM CURRENT;
+

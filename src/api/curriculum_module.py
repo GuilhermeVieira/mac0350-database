@@ -7,10 +7,9 @@ class CurriculumModule:
     def __init__(self):
         return
 
-    def planeja_disciplina(self, email):
+    def verifica_disciplina_existe(self, data_ini, dpto, cod):
         try:
-            self.session.execute(func.cria_usuario(email, password))
-            self.session.commit()
-            return True
+            return self.session.execute(func.verifica_disciplina_existe(data_ini, dpto, cod)).first()[0]
         except Exception as e:
-            return str(e)
+            print('Erro: ' + str(e))
+            return None
