@@ -1,4 +1,4 @@
-from app import app, accessdb
+from app import app, accessdb, acc_peodb
 from forms import LoginForm
 from flask_bootstrap import Bootstrap
 from flask import render_template, redirect, url_for
@@ -42,4 +42,8 @@ def logout():
 def home(profile_id):
     if current_user.us_id != int(profile_id):
         return 'Unauthorized: You do not have the right credentials to access this page!'
-    return 'The current user is ' + current_user.us_email
+    
+    nusp = acc_peodb.get_user_nusp(current_user.us_email)
+    if not nusp:
+        return 'Usuário ainda não vinculado com número USP'
+    return 'The current user NUSP is ' + str(nusp)

@@ -24,7 +24,7 @@ class AccessModule:
         try:
             return self.session.execute(func.verifica_senha(email, password)).first()[0]
         except Exception as e:
-            print('Erro' + e)
+            print('Erro: ' + e)
             return False 
 
     def get_user_by_id(self, us_id):
