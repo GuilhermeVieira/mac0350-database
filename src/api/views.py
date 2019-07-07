@@ -1,7 +1,7 @@
 from app import app, accessdb, acc_peodb, peopledb
-from forms import LoginForm
+from forms import LoginForm, CriaUsuarioForm
 from flask_bootstrap import Bootstrap
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 # Bootstrap
@@ -42,7 +42,7 @@ def logout():
 def home(profile_id):
     if current_user.us_id != int(profile_id):
         return 'Unauthorized: You do not have the right credentials to access this page!'
-    
+
     nusp = acc_peodb.get_user_nusp(current_user.us_email)
     if not nusp:
         return 'Usuário ainda não vinculado com número USP'
@@ -60,7 +60,23 @@ def usuario(profile_id):
 def aluno(profile_id):
     if current_user.us_id != int(profile_id):
         return 'Unauthorized: You do not have the right credentials to access this page!'
-    return 'Aluno page'
+
+    form = PlanejaDisciplinaForm()
+    CONTENT = {
+        "Services": [
+            ["Planeja disciplina", "planeja_disciplina"]
+        ]
+    }
+    return render_template('dashboard.html', name = peopledb.get_name(acc_peodb.get_user_nusp(current_user.us_email)), CONTENT = CONTENT)
+
+# Aluno services
+@app.route('/home/<profile_id>/planejadisciplina')
+@login_required
+def planeja_disciplina(profile_id):
+    if current_user.us_id != int(profile_id):
+        return 'Unauthorized: You do not have the right credentials to access this page!'
+
+    return render_template('planeja_disciplina.html', )
 
 @app.route('/home/<profile_id>/professor')
 @login_required
@@ -84,17 +100,22 @@ def dba(profile_id):
 
     CONTENT = {
         "Services": [
-            ["Cria usuário", "create_user"]
+            ["Cria usuário", "cria_usuario"]
         ]
     }
     return render_template('dashboard.html', name = peopledb.get_name(acc_peodb.get_user_nusp(current_user.us_email)), CONTENT = CONTENT)
 
 # DBA Services
-@app.route('/home/<profile_id>/criausuario')
+@app.route('/home/<profile_id>/cria_usuario', methods=['GET', 'POST'])
 @login_required
-def create_user(profile_id):
+def cria_usuario(profile_id):
     if current_user.us_id != int(profile_id):
         return 'Unauthorized: You do not have the right credentials to access this page!'
 
-    return 'DBA cria usuário'
+    form = CriaUsuarioForm()
+    if form.validate_on_submit():
+        if accessdb.create_user(form.email.data, form.password.data):
+            return redirect(url_for('cria_usuario', profile_id = current_user.us_id))
+        return '<h1>Email ou senha inválidos.</h1>'
+    return render_template('cria_usuario.html', form = form)
 
