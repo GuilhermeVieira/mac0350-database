@@ -47,3 +47,38 @@ def home(profile_id):
     if not nusp:
         return 'Usuário ainda não vinculado com número USP'
     return render_template('dashboard.html', name = peopledb.get_name(nusp))
+
+@app.route('/home/<profile_id>/usuario')
+@login_required
+def usuario(profile_id):
+    if current_user.us_id != int(profile_id):
+        return 'Unauthorized: You do not have the right credentials to access this page!'
+    return 'Usuário page'
+
+@app.route('/home/<profile_id>/aluno')
+@login_required
+def aluno(profile_id):
+    if current_user.us_id != int(profile_id):
+        return 'Unauthorized: You do not have the right credentials to access this page!'
+    return 'Aluno page'
+
+@app.route('/home/<profile_id>/professor')
+@login_required
+def professor(profile_id):
+    if current_user.us_id != int(profile_id):
+        return 'Unauthorized: You do not have the right credentials to access this page!'
+    return 'Professor page'
+
+@app.route('/home/<profile_id>/administrador')
+@login_required
+def administrador(profile_id):
+    if current_user.us_id != int(profile_id):
+        return 'Unauthorized: You do not have the right credentials to access this page!'
+    return 'Administrador page'
+
+@app.route('/home/<profile_id>/dba')
+@login_required
+def dba(profile_id):
+    if current_user.us_id != int(profile_id):
+        return 'Unauthorized: You do not have the right credentials to access this page!'
+    return 'DBA page'
