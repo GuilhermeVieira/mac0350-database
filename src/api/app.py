@@ -1,16 +1,22 @@
 import os
 from access_module import AccessModule
-from flask import Flask, render_template, request
+from flask import Flask, render_template, redirect, url_for
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_bootstrap import Bootstrap
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, BooleanField
+from wtforms.validators import InputRequired, Email, Length
 
 project_name = "GradUSP"
 
 app = Flask(project_name, template_folder = './templates')
 app.config['SECRET_KEY'] = b'\xe8\x11\xbcO\xdcHw#\xcbI0c\x0f\x96\x19w'
 
+bootstrap = Bootstrap(app)
+
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'login'
+login_manager.login_view = '/'
 
 accessdb = AccessModule()
 
@@ -18,30 +24,34 @@ accessdb = AccessModule()
 def load_user(us_id):
     return accessdb.get_user_by_id(us_id)
 
-@app.route('/')
+
+# Forms
+
+class LoginForm(FlaskForm):
+    email = StringField('email', validators=[InputRequired(), Length(min=4, max=32)])
+    password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
+    remember = BooleanField('remember me')
+
+# Routes
+@app.route('/', methods = ['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    form = LoginForm()
 
-@app.route('/logmein', methods = ['POST'])
-def logmein():
-    email = request.form['email']
-    password = request.form['password']
-    user = accessdb.get_user_by_email(email)
+    if form.validate_on_submit():
+        user = accessdb.get_user_by_email(form.email.data)
+        if user:
+            if accessdb.authenticate_user(form.email.data, form.password.data):
+                login_user(user, remember = form.remember.data)
+                return redirect(url_for('home'))
+        return '<h1>Invalid username or password</h1>'
 
-    if not user:
-        return 'User not found'
-
-    if accessdb.authenticate_user(email, password):
-        login_user(user)
-        return 'You are now logged in'
-
-    return 'Invalid credentials! Try logging in again'
+    return render_template('login.html', form = form)
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return 'You are now logged out!'
+    return redirect(url_for('login'))
 
 @app.route('/home')
 @login_required
