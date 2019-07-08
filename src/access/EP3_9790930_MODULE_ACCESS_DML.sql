@@ -136,6 +136,7 @@ INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'pega_disciplinas_de_
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'pega_disciplinas_cursadas_semestre');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'pega_disciplina');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'pega_alunos_em_curriculo');
+INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'recupera_nome');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'e_aluno');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'e_professor');
 INSERT INTO b03_PF_SE(pf_tipo, se_nome) VALUES ('USUARIO', 'e_admin');
@@ -158,6 +159,7 @@ INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM users WHERE
 INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM users WHERE us_email='tallica@bobson.com';
 INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM users WHERE us_email='tallica@bobson.com';
 INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM users WHERE us_email='tallica@bobson.com';
+INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'USUARIO' FROM users WHERE us_email='tallica@bobson.com';
 INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ADMIN' FROM users WHERE us_email='mengao@bobson.com';
 INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'ALUNO' FROM users WHERE us_email='mengao@bobson.com';
 INSERT INTO b04_US_PF(us_id, pf_tipo) SELECT us_id, 'PROFESSOR' FROM users WHERE us_email='mengao@bobson.com';

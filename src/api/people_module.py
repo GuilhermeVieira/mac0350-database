@@ -1,9 +1,9 @@
 import databases
 from database_handler import load_session, func
 
-class PeopleModule: 
+class PeopleModule:
     session, Base = load_session(databases.urls['DATABASE_PEOPLE_URL'])
-    
+
     def __init__(self):
         return
 
@@ -11,5 +11,12 @@ class PeopleModule:
         try:
             return self.session.execute(func.recupera_nome(nusp)).first()[0]
         except Exception as e:
-            print('Erro: ' + e)
+            print('Erro: ' + str(e))
             return 'NOT FOUND'
+
+    def recupera_nome(self, nusp):
+        try:
+            return self.session.execute(func.recupera_nome(nusp)).first()[0]
+        except Exception as e:
+            print('Erro: ' + str(e))
+            return False

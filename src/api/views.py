@@ -53,7 +53,12 @@ def home(profile_id):
 def usuario(profile_id):
     if current_user.us_id != int(profile_id):
         return 'Unauthorized: You do not have the right credentials to access this page!'
-    return 'Usuário page'
+    CONTENT = {
+        "Services": [
+            ["Recuperar nome completo", "recupera_nome"],
+        ]
+    }
+    return render_template('dashboard.html', name = peopledb.get_name(acc_peodb.get_user_nusp(current_user.us_email)), CONTENT = CONTENT)
 
 @app.route('/home/<profile_id>/aluno')
 @login_required
@@ -97,6 +102,22 @@ def dba(profile_id):
     }
     return render_template('dashboard.html', name = peopledb.get_name(acc_peodb.get_user_nusp(current_user.us_email)), CONTENT = CONTENT)
 
+# User Services
+@app.route('/home/<profile_id>/recupera_nome', methods=['GET', 'POST'])
+@login_required
+def recupera_nome(profile_id):
+    if not accessdb.is_allowed(current_user.us_id, 'recupera_nome'):
+        return 'Unauthorized: You do not have the right credentials to access this page!'
+
+    form = forms.RecuperaNomeForm()
+    if form.validate_on_submit():
+        nome_completo = peopledb.recupera_nome(form.nusp.data)
+        if nome_completo:
+            return '<h1>Nome completo: ' + nome_completo + '</h1>'
+        return '<h1>Erro.</h1>'
+    return render_template('recupera_nome.html', form = form)
+
+
 # Aluno services
 @app.route('/home/<profile_id>/planeja_disciplina', methods=['GET', 'POST'])
 @login_required
@@ -135,9 +156,8 @@ def pega_lista_de_desejos(profile_id):
         return 'Unauthorized: You do not have the right credentials to access this page!'
 
     nusp = acc_peodb.get_user_nusp(current_user.us_email)
-    disc_desejadas = peo_curdb.pega_lista_de_desejos(nusp)
-
-    return render_template('pega_lista_de_desejos.html', disc_desejadas = disc_desejadas)
+    desejadas = peo_curdb.pega_lista_de_desejos(nusp)
+    return render_template('pega_lista_de_desejos.html', desejadas = desejadas)
 
 # DBA Services
 @app.route('/home/<profile_id>/cria_usuario', methods=['GET', 'POST'])

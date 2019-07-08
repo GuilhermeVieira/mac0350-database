@@ -14,7 +14,11 @@ Aluno - Disciplinas em planejamento
 <div class="container">
 
   <h1>Disciplinas em planejamento</h1>
-  {{ disc_desejadas }}
+  {% for d in desejadas %}
+    {% for data in d %}
+      {{ data }}<br>
+    {% endfor %}
+  {% endfor %}
 
 </div> <!-- /container -->
 {% endblock %}

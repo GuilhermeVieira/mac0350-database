@@ -7,6 +7,9 @@ class LoginForm(FlaskForm):
     password = PasswordField('Senha', validators=[InputRequired(), Length(min=8, max=80)])
     remember = BooleanField('Lembrar')
 
+class RecuperaNomeForm(FlaskForm):
+    nusp = IntegerField('Número USP', validators=[InputRequired(), NumberRange(min=1, max=999999999)])
+
 class PlanejaDisciplinaForm(FlaskForm):
     data_inicio = StringField('Data de início', validators=[InputRequired(), Length(min=4, max=4)])
     departamento = StringField('Departamento', validators=[InputRequired(), Length(min=3, max=3)])
