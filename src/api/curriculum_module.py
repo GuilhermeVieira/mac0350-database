@@ -13,3 +13,11 @@ class CurriculumModule:
         except Exception as e:
             print('Erro: ' + str(e))
             return None
+
+    def adiciona_disciplina(self, data_ini, dpto, codigo, jupiter_link, nome, descricao, data_fim, cred_a, cred_t):
+        try:
+            self.session.execute(func.adiciona_disciplina(data_ini, dpto, codigo, jupiter_link, nome, descricao, data_fim, cred_a, cred_t))
+            return True
+        except Exception as e:
+            print(str(e))
+            return False

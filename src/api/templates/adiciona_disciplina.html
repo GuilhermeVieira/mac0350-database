@@ -2,7 +2,7 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}
-Aluno - Remove planejamento
+Administrador - Adicionar disciplina
 {% endblock %}
 
 {% block styles %}
@@ -13,12 +13,18 @@ Aluno - Remove planejamento
 {% block content %}
 <div class="container">
 
-  <form class="form-signin" method="POST" action="{{ url_for('remove_planejamento', profile_id = current_user.us_id) }}">
-    <h2 class="form-signin-heading">Remove disciplina (Aluno)</h2>
+  <form class="form-signin" method="POST" action="{{ url_for('adiciona_disciplina', profile_id = current_user.us_id) }}">
+    <h2 class="form-signin-heading">Adicionar disciplina (Administrador)</h2>
     {{ form.hidden_tag() }}
-    {{ wtf.form_field(form.data_inicio) }}
     {{ wtf.form_field(form.departamento) }}
     {{ wtf.form_field(form.codigo) }}
+    {{ wtf.form_field(form.data_inicio) }}
+    {{ wtf.form_field(form.data_fim) }}
+    {{ wtf.form_field(form.nome) }}
+    {{ wtf.form_field(form.cred_al) }}
+    {{ wtf.form_field(form.cred_tr) }}
+    {{ wtf.form_field(form.descricao) }}
+    {{ wtf.form_field(form.jupiter_link) }}
     <button class="btn btn-lg btn-primary btn-block" type="submit">Confirmar</button>
   </form>
 

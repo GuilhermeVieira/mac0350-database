@@ -87,7 +87,13 @@ def professor(profile_id):
 def administrador(profile_id):
     if current_user.us_id != int(profile_id):
         return 'Unauthorized: You do not have the right credentials to access this page!'
-    return 'Administrador page'
+
+    CONTENT = {
+        "Services": [
+            ["Adicionar disciplina", "adiciona_disciplina"]
+        ]
+    }
+    return render_template('dashboard.html', name = peopledb.get_name(acc_peodb.get_user_nusp(current_user.us_email)), CONTENT = CONTENT)
 
 @app.route('/home/<profile_id>/dba')
 @login_required
@@ -116,7 +122,6 @@ def recupera_nome(profile_id):
             return '<h1>Nome completo: ' + nome_completo + '</h1>'
         return '<h1>Erro.</h1>'
     return render_template('recupera_nome.html', form = form)
-
 
 # Aluno services
 @app.route('/home/<profile_id>/planeja_disciplina', methods=['GET', 'POST'])
@@ -158,6 +163,20 @@ def pega_lista_de_desejos(profile_id):
     nusp = acc_peodb.get_user_nusp(current_user.us_email)
     desejadas = peo_curdb.pega_lista_de_desejos(nusp)
     return render_template('pega_lista_de_desejos.html', desejadas = desejadas)
+
+# Admin Services
+@app.route('/home/<profile_id>/adiciona_disciplina', methods=['GET', 'POST'])
+@login_required
+def adiciona_disciplina(profile_id):
+    if not accessdb.is_allowed(current_user.us_id, 'adiciona_disciplina'):
+        return 'Unauthorized: You do not have the right credentials to access this page!'
+
+    form = forms.AdicionaDisciplinaForm()
+    if form.validate_on_submit():
+        if curriculumdb.adiciona_disciplina(form.data_inicio.data, form.departamento.data, form.codigo.data, form.jupiter_link.data, form.nome.data, form.descricao.data, form.data_fim.data, form.cred_al.data, form.cred_tr.data):
+            return redirect(url_for('adiciona_disciplina', profile_id = current_user.us_id))
+        return '<h1>Erro.</h1>'
+    return render_template('adiciona_disciplina.html', form = form)
 
 # DBA Services
 @app.route('/home/<profile_id>/cria_usuario', methods=['GET', 'POST'])
